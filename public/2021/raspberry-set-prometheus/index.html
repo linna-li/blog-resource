@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="linna.li">
+  <meta name="description" content="Study Note">
+  <meta name="keywords" content="work server-side">
+  
+  <link rel="prev" href="https://linna-li.github.io/2021/raspberry-set-os/" />
+  <link rel="next" href="https://linna-li.github.io/2021/raspberry-set-grafana/" />
+  <link rel="canonical" href="https://linna-li.github.io/2021/raspberry-set-prometheus/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           安装prometheus | Linna
+       
+  </title>
+  <meta name="title" content="安装prometheus | Linna">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/linna-li.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "安装prometheus",
+    "headline" : "安装prometheus",
+    "description" : "成果：安装 prometheus 的 node-exporter 来导出 server 的 metrics。prometheus 是用来收集 metrics 的，grafana 通过 pull 的方式去拿数据，然后进行显示。除了 prometheus 之外也有其他的 datasource，比如 influxdb，是通过 push 的方式来向 grafana 发送数据。 参考文档：https:\/\/computingforgeeks.com\/how-to-monitor-linux-server-performance-with-prometheus-and-grafana-in-5-minutes\/\n 这个文档也是没有用 apt 指令，是通过 APT 仓库进行安装。但是我搞错了版本，应该用 ARM64的版本，但是我用的是 amd64。amd64 是 x86-64, 后来只能清理了所有的 node-exporter，直接用 apt 重新安装的。（用 lsb_release -a 可以看到 ubuntu 版本）\nsudo apt install prometheus-node-exporter sudo systemctl daemon-reload sudo systemctl start prometheus-node-exporter sudo systemctl enable prometheus-node-exporter sudo systemctl status prometheus-node-exporter 成功之后发现从 server 的 local 可以看到 metrics，但是用 mac 上用 curl -GET http:\/\/localhost:9100\/metrics 没有办法。 用指令来检查端口的开放情况 sudo ufw status verbose 发现 9100 端口没有开放 用指令开放：sudo ufw allow 9100\/tcp 因为不熟悉 ubuntu server 的文件结构，所以出错了也不知道应该改哪个文件，只能参考这个文档尽量做到清除干净： http:\/\/www.",
+    "inLanguage" : "en-us",
+    "author" : "linna.li",
+    "creator" : "linna.li",
+    "publisher": "linna.li",
+    "accountablePerson" : "linna.li",
+    "copyrightHolder" : "linna.li",
+    "copyrightYear" : "2021",
+    "datePublished": "2021-01-30 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2021-01-30 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/linna-li.github.io\/2021\/raspberry-set-prometheus\/",
+    "wordCount" : "174",
+    "keywords" : [ "raspberry", "Linna"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://linna-li.github.io">Linna</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://linna-li.github.io">Linna</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">安装prometheus</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://linna-li.github.io" rel="author">linna.li</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2021-01-30 itemprop="datePublished">January 30, 2021</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://linna-li.github.io/categories/note/"> note </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <blockquote>
+<p>成果：安装 prometheus 的 node-exporter 来导出 server 的 metrics。prometheus 是用来收集 metrics 的，grafana 通过 pull 的方式去拿数据，然后进行显示。除了 prometheus 之外也有其他的 datasource，比如 influxdb，是通过 push 的方式来向 grafana 发送数据。
+参考文档：https://computingforgeeks.com/how-to-monitor-linux-server-performance-with-prometheus-and-grafana-in-5-minutes/</p>
+</blockquote>
+<p>这个文档也是没有用 apt 指令，是通过 APT 仓库进行安装。但是我搞错了版本，应该用 <em>ARM64</em>的版本，但是我用的是 amd64。amd64 是 x86-64, 后来只能清理了所有的 node-exporter，直接用 apt 重新安装的。（用 lsb_release -a 可以看到 ubuntu 版本）</p>
+<pre><code>sudo apt install prometheus-node-exporter
+sudo systemctl daemon-reload
+sudo systemctl start prometheus-node-exporter
+sudo systemctl enable prometheus-node-exporter
+sudo systemctl status prometheus-node-exporter
+</code></pre><p>成功之后发现从 server 的 local 可以看到 metrics，但是用 mac 上用 curl -GET http://localhost:9100/metrics 没有办法。
+用指令来检查端口的开放情况
+sudo ufw status verbose
+发现 9100 端口没有开放
+用指令开放：sudo ufw allow 9100/tcp
+<img src="/images/port.png" alt="">
+因为不熟悉 ubuntu server 的文件结构，所以出错了也不知道应该改哪个文件，只能参考这个文档尽量做到清除干净：
+<a href="http://www.linfo.org/var.html">http://www.linfo.org/var.html</a>
+<a href="https://superuser.com/questions/513159/how-to-remove-systemd-services">https://superuser.com/questions/513159/how-to-remove-systemd-services</a></p>
+<p>安装 sudo apt  install tree 可以来看到文件结构。command: tree workspace/
+node_exporter.service 文件可以自己 customized。如果用 apt 下载，这个文件会被叫做 prometheus-node-exporter.service</p>
+<pre><code>$ cat data/node_exporter.service
+[Unit]
+Description=Node Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=node_exporter
+Group=node_exporter
+Type=simple
+ExecStart=/usr/local/bin/node_exporter
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><h3 id="关于-prometheus">关于 prometheus</h3>
+<ul>
+<li>performance 主要是为了看 CPU, Memory, Disk I/O, Network</li>
+<li>使用 pull 的方式（Scrap）从 client 中获得 metrics，然后存在它的 local time series 的数据库(TSDB)里</li>
+<li>alerting 使用 AlertManager, 可以自己选择 notification system</li>
+<li>可以自动的发现不同的 target（不需要我们去更新 address）</li>
+</ul>
+<p>注意，前一步只是安装了 prometheus-node-exporter，只是一个 node-exporter，只是带了一些配置
+所以还是需要安装 prometheus 并且开放端口</p>
+<pre><code>sudo apt install prometheus
+sudo systemctl daemon-reload
+sudo systemctl enable prometheus
+sudo systemctl status prometheus
+sudo ufw allow 9090/tcp
+</code></pre><h3 id="关于为什么不用-apt">关于为什么不用 apt</h3>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>linna.li </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://linna-li.github.io/2021/raspberry-set-prometheus/>https://linna-li.github.io/2021/raspberry-set-prometheus/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://linna-li.github.io/tags/raspberry/">
+                    #raspberry</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://linna-li.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://linna-li.github.io/2021/raspberry-set-os/" class="prev" rel="prev" title="安装ubuntu系统"><i class="iconfont icon-left"></i>&nbsp;安装ubuntu系统</a>
+         
+        
+        <a href="https://linna-li.github.io/2021/raspberry-set-grafana/" class="next" rel="next" title="安装grafana系统">安装grafana系统&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2020 - 2021</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://linna-li.github.io">linna.li</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="linna.li">
+  <meta name="description" content="Study Note">
+  <meta name="keywords" content="work server-side">
+  
+  <link rel="prev" href="https://linna-li.github.io/2021/21-merge-two-sorted-lists/" />
+  <link rel="next" href="https://linna-li.github.io/2021/19-remove-nth-from-end/" />
+  <link rel="canonical" href="https://linna-li.github.io/2021/203-remove-linked-list-elements/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           LeetCode-203 | Linna
+       
+  </title>
+  <meta name="title" content="LeetCode-203 | Linna">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/linna-li.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "LeetCode-203",
+    "headline" : "LeetCode-203",
+    "description" : "Description  从链表中删除给定的节点 给定了头节点，被删除的节点会有很多个\n My Answer  把自己的前一个节点的next指向自己的next 所以需要存下来before 注意记得修改before\n Complexity  时间复杂度 O(n), 不需要再优化了 空间复杂度 O(1), 用了两个节点保存前一个节点和本身\n Other Answer  大神们的解法使用递归，这样就需要多余的空间了 3 line recursive solution\n ",
+    "inLanguage" : "en-us",
+    "author" : "linna.li",
+    "creator" : "linna.li",
+    "publisher": "linna.li",
+    "accountablePerson" : "linna.li",
+    "copyrightHolder" : "linna.li",
+    "copyrightYear" : "2021",
+    "datePublished": "2021-01-10 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2021-01-10 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/linna-li.github.io\/2021\/203-remove-linked-list-elements\/",
+    "wordCount" : "22",
+    "keywords" : [ "LinkedList","leetcode", "Linna"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://linna-li.github.io">Linna</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://linna-li.github.io">Linna</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">LeetCode-203</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://linna-li.github.io" rel="author">linna.li</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2021-01-10 itemprop="datePublished">January 10, 2021</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://linna-li.github.io/categories/datastructure/"> DataStructure </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <h2 id="description">Description</h2>
+<blockquote>
+<p>从链表中删除给定的节点
+给定了头节点，被删除的节点会有很多个</p>
+</blockquote>
+<h2 id="my-answer">My Answer</h2>
+<blockquote>
+<p>把自己的前一个节点的next指向自己的next
+所以需要存下来before
+注意记得修改before</p>
+</blockquote>
+<h2 id="complexity">Complexity</h2>
+<blockquote>
+<p>时间复杂度 O(n), 不需要再优化了
+空间复杂度 O(1), 用了两个节点保存前一个节点和本身</p>
+</blockquote>
+<h2 id="other-answer">Other Answer</h2>
+<blockquote>
+<p>大神们的解法使用递归，这样就需要多余的空间了 <a href="https://leetcode.com/problems/remove-linked-list-elements/discuss/57306/3-line-recursive-solution">3 line recursive solution</a></p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>linna.li </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://linna-li.github.io/2021/203-remove-linked-list-elements/>https://linna-li.github.io/2021/203-remove-linked-list-elements/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://linna-li.github.io/tags/linkedlist/">
+                    #LinkedList</a></span>
+            
+            <span class="tag"><a href="https://linna-li.github.io/tags/leetcode/">
+                    #leetcode</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://linna-li.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://linna-li.github.io/2021/21-merge-two-sorted-lists/" class="prev" rel="prev" title="LeetCode-21"><i class="iconfont icon-left"></i>&nbsp;LeetCode-21</a>
+         
+        
+        <a href="https://linna-li.github.io/2021/19-remove-nth-from-end/" class="next" rel="next" title="LeetCode-19">LeetCode-19&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2020 - 2021</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://linna-li.github.io">linna.li</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>
