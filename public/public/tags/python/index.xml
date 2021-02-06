@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Linna</title>
+    <link>https://linna-li.github.io/tags/python/</link>
+    <description>Recent content in Python on Linna</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 18 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://linna-li.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>超入門個人用Python Note</title>
+      <link>https://linna-li.github.io/2020/python-install/</link>
+      <pubDate>Sat, 18 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2020/python-install/</guid>
+      <description>BackGround  Recently, there is a new 後輩 joined my team who is very good at Python, so i think i got a good chance to start learning python. ^ ^
+ What i learned Before:
+Only know there is a language called python
+After:
+But it has many &amp;ldquo;friends?&amp;rdquo;
+Python2, Python3-&amp;gt; 2 python version
+pyenv -&amp;gt; a tool that is used to change which version
+pip3, pip -&amp;gt; pip3 is used to download dependency for python2, pip is for python2</description>
+    </item>
+    
+  </channel>
+</rss>

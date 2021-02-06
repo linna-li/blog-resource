@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>book on Linna</title>
+    <link>https://linna-li.github.io/categories/book/</link>
+    <description>Recent content in book on Linna</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 18 Jan 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://linna-li.github.io/categories/book/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>CTCI3-Technical Questions</title>
+      <link>https://linna-li.github.io/2021/ctci3/</link>
+      <pubDate>Mon, 18 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/ctci3/</guid>
+      <description>String和Array总是可以互换的问题
+ 实现Hashtables 哈希表（Hashtable）又称为“散置”，Hashtable是会根据索引键的哈希程序代码组织成的索引键（Key）和值（Value）配对的集合。
+ 根据key计算hash值 map hash值到一个index里（array） 每一个index是一个链表，链表里的每一个元素是 (key, value)  实现ArrayList和Resizable Arrays  Resizable Arrays是可变大小的数组 amortized insertion的runtime是O(1) 在向一个list插入数据的时候，每次满了就会把容量扩大一倍，然后之前的复制到新的里面去
+ StringBuilder 链接n个相同长度的string时候，如果使用String，时间复杂度是 O(xn^2) 如果使用了StringBuilder（可变长度的string）时间复杂度就是O(n) ?
+Interview Question  判断一个String里面的元素是不是都是不重复的，要求不使用一个多余的数据结构  思考： 不能使用map ？ 只是用String 把每一个字符转换为他的Ascii码，存在数组里，如果数组中有数据了，就代表重复的。 时间复杂度O(n), n 为字符串的长度，空间复杂度是需要一个128容量的array
+boolean isUnique(String s){ if(s==null||s.length()==0){ return true; } int[] asciiArray = new int[128]; for(int i = 0;i &amp;lt; s.length();i++){ if(asciiArray[Integer.valueOf(s.chatAt(i))]!=0){ return false; }else{ asciiArray[Integer.valueOf(s.chatAt(i))] = 1; } } return true; } 答案：  首先应该问面试官是ASCII还是unicode: ASCII是一个字节(1 byte (字节)= 8 bit(位))，只支持英文；Unicode两个字节支持所有语言；UTF-8是1-6个字节，英文字母一个字节汉字三个字节生僻字4-6个字节； ASCII码一共规定了128个字符的编码（0 000 0000–0 111 1111），比如空格”SPACE”是32（二进制00100000），大写的字母A是65（二进制01000001）。这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的1位统一规定为0  boolean isUniqueChars(String str){ if(str.</description>
+    </item>
+    
+    <item>
+      <title>CTCI2-Technical Questions</title>
+      <link>https://linna-li.github.io/2021/ctci2/</link>
+      <pubDate>Sat, 16 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/ctci2/</guid>
+      <description>How to prepare  自己思考，同时要思考复杂度 在纸上写code 纸上测试code（general cases, base cases, error cases) 把纸上的code输入到电脑里，看自己有哪些错误 mock interview  What you need to know  Practicing implementing the data structures and algorithm on paper, then on computer basic： 2^10 大概是 1000， 2^20 大概是1million（100万），2^30 大概是1billion（10亿）= 1GB， 2^40 大概是 1trillion（1万亿）= 1TB  Walking through a problem  Listen: 注意一些特别的词，sorted，repeatedly Draw an Example: 给定值，足够大，不是一个特殊例子 先考虑一个暴力解法，给定时间和空间复杂度 优化：看看有没有没用到的信息；考虑一个新的例子；不正确的解决（？）；tradeoff时间和空间；提前计算；使用hash table；考虑最佳的runtime 检查 写代码: 从左上角开始写，避免倾斜，漂亮的代码（模块化初始化方法，做class，错误检查，命名） 测试: 概念上的测试（假装自己正在给别人讲代码）；有没有看起来奇怪的代码；热点问题；小的测试例子；特殊的例子；  优化  查找瓶颈（优化是瓶颈的那部分才有意义） 去掉不必要的工作（比如说可以用多一步计算来减少一层循环） 去掉重复工作（用hashmap保存下来结果） 假装是自己在做，而不是考虑一个算法 简化和普遍化 从base case开始（n=1） 过一遍所有的数据结构：linkedlist不适合accessing和给是数字排序； Best Conceivable Runtime(BCR) 可能但是不一定会存在的最优时间，一般用于作为hint，也作为时间优化的上限。如果已经达到这时间，说明时间上不能再进行优化，只能优化空间。 当遇到一个考过的问题，要告诉面试官 选择语言：java属于比较易懂的，不用考虑memory和指针。java属于比较冗长的语言，例如python可以直接返回多个值，但是java必须要一个class 好的代码：正确，高效，简洁，可读性，可维护性 正确地使用数据结构 写可以重复使用的代码（抽取重复部分写成一个方法） 可以抽取成方法的写成一个方法（不要把一个方法写的很长） 灵活性（可以对应多种例子，general） 要做错误检查，参数认证检查  </description>
+    </item>
+    
+    <item>
+      <title>Cracking the code interview1</title>
+      <link>https://linna-li.github.io/2021/ctci1/</link>
+      <pubDate>Wed, 13 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/ctci1/</guid>
+      <description>BackGround 昨天前辈借我一本书让我读，全英文，所以在昨天晚上的第一次尝试就读着读着睡着了。 今晚我来邻居小姐姐家找她一起学习，顺利地读了一部分。前五章是关于interview的介绍，准备，还有行为测试，就先略过了。 前辈的建议是做完每一章的算法题
+Big O Big O 是用来描述一个算法有效性的 O() 空间复杂度，包好了递归函数中用到的变量 可以省略到非主流的部分：O(x!) &amp;gt; O(2^x) &amp;gt; O(x^2) &amp;gt; O(xlogx) &amp;gt; O(x) &amp;gt; O(logx)
+Amortized Time(均摊时间)： 在插入数据到ArrayList的时候，正常是在末尾插入，所以复杂度是O(1), 但是满了之后会扩大容量为两倍，然后复制现有的进去，再进行插入，所以花费的时间是n，所以插入x个数据的时间是：1+2+4+&amp;hellip;.+x (省略了不需要复制的时候插入消耗的时间) 所以插入每一个花费的时间是 （1+2+4+&amp;hellip;.+x）/x = 书上说是 O（1） （不太懂 这里）
+Log N Runtime Recursive Runtime 2^0+2^1+&amp;hellip;.2^n = 2^(n+1) - 1 如果有递归算法的话，一般来说时间都是 O(branched^depth)
+Example and Exercise O(N+M) 不可以认为是 O(N)
+Example 8 有一个String的数组，需要给每一个string自己排序，然后给整个string排序，求时间复杂度 首先第一轮循环把每个string排序。排序每一个string需要的时间是 slogs ， 假设一共是a个，所以一共需要 aslogs。 第二轮是排序这个数组 aloga 次比较，每次比较花费s， 所以是saloga 一共花费时间 aslogs + saloga ===》 O(as(logs+loga))</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="linna.li">
+  <meta name="description" content="Study Note">
+  <meta name="keywords" content="work server-side">
+  
+  <link rel="prev" href="https://linna-li.github.io/2020/python-install/" />
+  <link rel="next" href="https://linna-li.github.io/2020/router-security/" />
+  <link rel="canonical" href="https://linna-li.github.io/2020/try-curl-http3-quic/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Try Http3 QUIC By using CURL | Linna
+       
+  </title>
+  <meta name="title" content="Try Http3 QUIC By using CURL | Linna">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/linna-li.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Try Http3 QUIC By using CURL",
+    "headline" : "Try Http3 QUIC By using CURL",
+    "description" : "Use ngtcp2  \x26quot;Call it TCP\/2. One More Time.\x26rdquo;\n ngtcp2 project is an effort to implement QUIC protocol which is now being discussed in IETF QUICWG for its standardization.\nBuild Build OpenSSL\ngit clone --depth 1 -b openssl-quic-draft-23 https:\/\/github.com\/tatsuhiro-t\/openssl cd openssl .\/config enable-tls1_3 --prefix=\/usr\/local\/include\/openssl make make install_sw Build nghttp3\nMake sure you have installed automake and autoconf\ngit clone https:\/\/github.com\/ngtcp2\/nghttp3 cd nghttp3 autoreconf -i .\/configure --prefix=\/usr\/local\/include\/nghttp3 --enable-lib-only make make install Build ngtcp2",
+    "inLanguage" : "en-us",
+    "author" : "linna.li",
+    "creator" : "linna.li",
+    "publisher": "linna.li",
+    "accountablePerson" : "linna.li",
+    "copyrightHolder" : "linna.li",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-01-18 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2020-01-18 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/linna-li.github.io\/2020\/try-curl-http3-quic\/",
+    "wordCount" : "300",
+    "keywords" : [ "HTTP","QUIC", "Linna"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://linna-li.github.io">Linna</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://linna-li.github.io">Linna</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Try Http3 QUIC By using CURL</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://linna-li.github.io" rel="author">linna.li</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2020-01-18 itemprop="datePublished">January 18, 2020</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://linna-li.github.io/categories/note/"> note </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <h2 id="use-ngtcp2">Use ngtcp2</h2>
+<blockquote>
+<p>&quot;Call it TCP/2. One More Time.&rdquo;</p>
+</blockquote>
+<p>ngtcp2 project is an effort to implement QUIC protocol which is now being discussed in IETF QUICWG for its standardization.</p>
+<h3 id="build">Build</h3>
+<p>Build OpenSSL</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">git clone --depth 1 -b openssl-quic-draft-23 https://github.com/tatsuhiro-t/openssl
+cd openssl
+./config enable-tls1_3 --prefix=/usr/local/include/openssl
+make
+make install_sw
+</code></pre></div><p>Build nghttp3</p>
+<p>Make sure you have installed automake and autoconf</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">git clone https://github.com/ngtcp2/nghttp3
+cd nghttp3
+autoreconf -i
+./configure --prefix=/usr/local/include/nghttp3 --enable-lib-only
+make
+make install
+</code></pre></div><p>Build ngtcp2</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">cd ..
+git clone https://github.com/ngtcp2/ngtcp2
+cd ngtcp2
+autoreconf -i
+./configure PKG_CONFIG_PATH=/usr/local/include/openssl/lib/pkgconfig:/usr/local/include/nghttp3/lib/pkgconfig LDFLAGS=&#34;-Wl,-rpath,/usr/local/include/openssl/lib&#34; --prefix=/usr/local/include/ngtcp2/
+make
+make install
+</code></pre></div><p>Build curl</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">cd ..
+git clone https://github.com/curl/curl
+cd curl
+./buildconf
+LDFLAGS=&#34;-Wl,-rpath,/usr/local/include/openssl/lib&#34; ./configure --with-ssl=/usr/local/include/openssl --with-nghttp3=/usr/local/include/nghttp3 --with-ngtcp2=/usr/local/include/ngtcp2
+make
+</code></pre></div><h3 id="run">Run</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">curl --http3 https://www.facebook.com/ -v -o /dev/null
+</code></pre></div><h3 id="compare">Compare</h3>
+<p>http3 is faster in connecting than http2</p>
+<p>(QUIC is fatster than TLS1.3)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">/**
+ <span style="color:#66d9ef">*</span> time_appconnect The time, in seconds, it took from the start until the SSL/SSH/etc       connect/handshake to the remote host was completed. (Added in 7.19.0)
+<span style="color:#66d9ef">*</span> time_connect The time, in seconds, it took from the start until the TCP connect to the remote host (or proxy) was completed.
+**/
+
+curl --http3 -i https://www.facebook.com/ -v -s -o output -w &#39;connect: %{time_connect} sec\ntime_appconnect: %{time_appconnect} sec\ntotal: %{time_total} sec\n&#39;
+
+10 times average: 
+Connection #0 to host www.facebook.com left intact
+connect: 0.000000 sec
+time_appconnect: 0.000000 sec
+total: 0.239049 sec
+
+curl --http2 -i https://www.facebook.com/ -v -s -o output -w &#39;connect: %{time_connect} sec\ntime_appconnect: %{time_appconnect} sec\ntotal: %{time_total} sec\n&#39;
+
+10 times average: 
+connect: 0.009577 sec
+time_appconnect: 0.027397 sec
+total: 0.333672 sec
+</code></pre></div><h3 id="problem-i-had">Problem i had</h3>
+<ul>
+<li>i refered to this for doing install, <a href="https://github.com/curl/curl/blob/master/docs/HTTP3.md">https://github.com/curl/curl/blob/master/docs/HTTP3.md</a></li>
+</ul>
+<p>Need to memo <!-- raw HTML omitted -->, <!-- raw HTML omitted -->, <!-- raw HTML omitted --></p>
+<ul>
+<li>sudo mkdir in /usr/, Operation not permitted.</li>
+</ul>
+<p>Refer to: <a href="https://qiita.com/iwaseasahi/items/9d2e29b02df5cce7285d">https://qiita.com/iwaseasahi/items/9d2e29b02df5cce7285d</a></p>
+<h3 id="what-i-learned">What i learned</h3>
+<ul>
+<li>
+<p>autoreconf = aclocal + automake -a + autoconf, used for making source directory have valid format.</p>
+</li>
+<li>
+<p>&ndash;prefix : install path</p>
+</li>
+<li>
+<p>enable-lib-only: only build</p>
+</li>
+<li>
+<p>make, make install: make=read command from Makefile, then compile, make install = install</p>
+</li>
+</ul>
+<h1 id="heading"></h1>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>linna.li </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://linna-li.github.io/2020/try-curl-http3-quic/>https://linna-li.github.io/2020/try-curl-http3-quic/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://linna-li.github.io/tags/http/">
+                    #HTTP</a></span>
+            
+            <span class="tag"><a href="https://linna-li.github.io/tags/quic/">
+                    #QUIC</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://linna-li.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://linna-li.github.io/2020/python-install/" class="prev" rel="prev" title="超入門個人用Python Note"><i class="iconfont icon-left"></i>&nbsp;超入門個人用Python Note</a>
+         
+        
+        <a href="https://linna-li.github.io/2020/router-security/" class="next" rel="next" title="设置路由器时要注意的安全问题">设置路由器时要注意的安全问题&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2020 - 2021</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://linna-li.github.io">linna.li</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>
