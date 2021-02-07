@@ -46,7 +46,7 @@
     "articleSection" : "posts",
     "name" : "CTCI3-Arrays and Strings",
     "headline" : "CTCI3-Arrays and Strings",
-    "description" : "String和Array总是可以互换的问题\n 实现Hashtables 哈希表（Hashtable）又称为“散置”，Hashtable是会根据索引键的哈希程序代码组织成的索引键（Key）和值（Value）配对的集合。\n 根据key计算hash值 map hash值到一个index里（array） 每一个index是一个链表，链表里的每一个元素是 (key, value)  实现ArrayList和Resizable Arrays  Resizable Arrays是可变大小的数组 amortized insertion的runtime是O(1) 在向一个list插入数据的时候，每次满了就会把容量扩大一倍，然后之前的复制到新的里面去\n StringBuilder 链接n个相同长度的string时候，如果使用String，时间复杂度是 O(xn^2) 如果使用了StringBuilder（可变长度的string）时间复杂度就是O(n) ?\nInterview Question  判断一个String里面的元素是不是都是不重复的，要求不使用一个多余的数据结构  思考： 不能使用map ？ 只是用String 把每一个字符转换为他的Ascii码，存在数组里，如果数组中有数据了，就代表重复的。 时间复杂度O(n), n 为字符串的长度，空间复杂度是需要一个128容量的array\nboolean isUnique(String s){ if(s==null||s.length()==0){ return true; } int[] asciiArray = new int[128]; for(int i = 0;i \x26lt; s.length();i\x2b\x2b){ if(asciiArray[Integer.valueOf(s.chatAt(i))]!=0){ return false; }else{ asciiArray[Integer.valueOf(s.chatAt(i))] = 1; } } return true; } 答案：  首先应该问面试官是ASCII还是unicode: ASCII是一个字节(1 byte (字节)= 8 bit(位))，只支持英文；Unicode两个字节支持所有语言；UTF-8是1-6个字节，英文字母一个字节汉字三个字节生僻字4-6个字节； ASCII码一共规定了128个字符的编码（0 000 0000–0 111 1111），比如空格”SPACE”是32（二进制00100000），大写的字母A是65（二进制01000001）。这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的1位统一规定为0  boolean isUniqueChars(String str){ if(str.",
+    "description" : "String 和 Array 总是可以互换的问题\n 实现 Hashtables 哈希表（Hashtable）又称为“散置”，Hashtable 是会根据索引键的哈希程序代码组织成的索引键（Key）和值（Value）配对的集合。\n 根据 key 计算 hash 值 map hash 值到一个 index 里（array） 每一个 index 是一个链表，链表里的每一个元素是 (key, value)  实现 ArrayList 和 Resizable Arrays  Resizable Arrays 是可变大小的数组 amortized insertion 的 runtime 是 O(1) 在向一个 list 插入数据的时候，每次满了就会把容量扩大一倍，然后之前的复制到新的里面去\n StringBuilder 链接 n 个相同长度的 string 时候，如果使用 String，时间复杂度是 O(xn^2) 如果使用了 StringBuilder（可变长度的 string）时间复杂度就是 O(n) ?\nInterview Question  判断一个 String 里面的元素是不是都是不重复的，要求不使用一个多余的数据结构  思考： 不能使用 map ？ 只是用 String 把每一个字符转换为他的 Ascii 码，存在数组里，如果数组中有数据了，就代表重复的。 时间复杂度 O(n), n 为字符串的长度，空间复杂度是需要一个 128 容量的 array",
     "inLanguage" : "en-us",
     "author" : "linna.li",
     "creator" : "linna.li",
@@ -57,7 +57,7 @@
     "datePublished": "2021-01-18 00:00:00 \x2b0000 UTC",
     "dateModified" : "2021-01-18 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/linna-li.github.io\/2021\/ctci3-arrays-and-strings\/",
-    "wordCount" : "309",
+    "wordCount" : "880",
     "keywords" : [ "data-structure", "Linna"]
 }
 </script>
@@ -143,32 +143,32 @@
           
 
           <blockquote>
-<p>String和Array总是可以互换的问题</p>
+<p>String 和 Array 总是可以互换的问题</p>
 </blockquote>
-<h1 id="实现hashtables">实现Hashtables</h1>
-<p>哈希表（Hashtable）又称为“散置”，Hashtable是会根据索引键的哈希程序代码组织成的索引键（Key）和值（Value）配对的集合。</p>
+<h1 id="实现-hashtables">实现 Hashtables</h1>
+<p>哈希表（Hashtable）又称为“散置”，Hashtable 是会根据索引键的哈希程序代码组织成的索引键（Key）和值（Value）配对的集合。</p>
 <ol>
-<li>根据key计算hash值</li>
-<li>map hash值到一个index里（array）</li>
-<li>每一个index是一个链表，链表里的每一个元素是 (key, value)</li>
+<li>根据 key 计算 hash 值</li>
+<li>map hash 值到一个 index 里（array）</li>
+<li>每一个 index 是一个链表，链表里的每一个元素是 (key, value)</li>
 </ol>
-<h1 id="实现arraylist和resizable-arrays">实现ArrayList和Resizable Arrays</h1>
+<h1 id="实现-arraylist-和-resizable-arrays">实现 ArrayList 和 Resizable Arrays</h1>
 <blockquote>
-<p>Resizable Arrays是可变大小的数组
-amortized insertion的runtime是O(1)
-在向一个list插入数据的时候，每次满了就会把容量扩大一倍，然后之前的复制到新的里面去</p>
+<p>Resizable Arrays 是可变大小的数组
+amortized insertion 的 runtime 是 O(1)
+在向一个 list 插入数据的时候，每次满了就会把容量扩大一倍，然后之前的复制到新的里面去</p>
 </blockquote>
 <h1 id="stringbuilder">StringBuilder</h1>
-<p>链接n个相同长度的string时候，如果使用String，时间复杂度是 O(xn^2)
-如果使用了StringBuilder（可变长度的string）时间复杂度就是O(n) ?</p>
+<p>链接 n 个相同长度的 string 时候，如果使用 String，时间复杂度是 O(xn^2)
+如果使用了 StringBuilder（可变长度的 string）时间复杂度就是 O(n) ?</p>
 <h1 id="interview-question">Interview Question</h1>
 <ol>
-<li>判断一个String里面的元素是不是都是不重复的，要求不使用一个多余的数据结构</li>
+<li>判断一个 String 里面的元素是不是都是不重复的，要求不使用一个多余的数据结构</li>
 </ol>
 <h4 id="思考">思考：</h4>
-<p>不能使用map ？ 只是用String
-把每一个字符转换为他的Ascii码，存在数组里，如果数组中有数据了，就代表重复的。
-时间复杂度O(n), n 为字符串的长度，空间复杂度是需要一个128容量的array</p>
+<p>不能使用 map ？ 只是用 String
+把每一个字符转换为他的 Ascii 码，存在数组里，如果数组中有数据了，就代表重复的。
+时间复杂度 O(n), n 为字符串的长度，空间复杂度是需要一个 128 容量的 array</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isUnique</span><span style="color:#f92672">(</span>String s<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
     <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>s<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">|</span><span style="color:#f92672">|</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span>0<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
@@ -185,8 +185,8 @@ amortized insertion的runtime是O(1)
 <span style="color:#f92672">}</span>
 </code></pre></div><h4 id="答案">答案：</h4>
 <ul>
-<li>首先应该问面试官是ASCII还是unicode: ASCII是一个字节(1 byte (字节)= 8 bit(位))，只支持英文；Unicode两个字节支持所有语言；UTF-8是1-6个字节，英文字母一个字节汉字三个字节生僻字4-6个字节；</li>
-<li>ASCII码一共规定了128个字符的编码（0 000 0000–0 111 1111），比如空格”SPACE”是32（二进制00100000），大写的字母A是65（二进制01000001）。这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的1位统一规定为0</li>
+<li>首先应该问面试官是 ASCII 还是 unicode: ASCII 是一个字节(1 byte (字节)= 8 bit(位))，只支持英文；Unicode 两个字节支持所有语言；UTF-8 是 1-6 个字节，英文字母一个字节汉字三个字节生僻字 4-6 个字节；</li>
+<li>ASCII 码一共规定了 128 个字符的编码（0 000 0000–0 111 1111），比如空格”SPACE”是 32（二进制 00100000），大写的字母 A 是 65（二进制 01000001）。这 128 个符号（包括 32 个不能打印出来的控制符号），只占用了一个字节的后面 7 位，最前面的 1 位统一规定为 0</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isUniqueChars</span><span style="color:#f92672">(</span>String str<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
     <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">&gt;</span> 128<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
@@ -202,13 +202,13 @@ amortized insertion的runtime是O(1)
     <span style="color:#f92672">}</span>
     <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><p>时间复杂度可以说是O(1),因为永远不会超过128
-如果只有小写的a到z的情况下，空间复杂度可以再改进</p>
+</code></pre></div><p>时间复杂度可以说是 O(1),因为永远不会超过 128
+如果只有小写的 a 到 z 的情况下，空间复杂度可以再改进</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isUniqueChars</span><span style="color:#f92672">(</span>String str<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
     <span style="color:#66d9ef">int</span> checker <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> <span style="color:#75715e">// int是4个字节
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
         <span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> str<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)</span> <span style="color:#f92672">-</span> <span style="color:#960050;background-color:#1e0010">`</span>a<span style="color:#960050;background-color:#1e0010">`</span><span style="color:#f92672">;</span>
-        <span style="color:#75715e">// 为什么要向左移动一位呢， 
+        <span style="color:#75715e">// 为什么要向左移动一位呢，
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">// 是为了避免两个a的情况 1 &lt;&lt; 0 = `0000 0001`
 </span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#f92672">(</span>checker <span style="color:#f92672">&amp;</span> <span style="color:#f92672">(</span>1<span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span>val<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">&gt;</span>0<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
             <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
@@ -220,7 +220,7 @@ amortized insertion的runtime是O(1)
 <li>给两个字符串，判断一个字符串是不是另外一个的排列</li>
 </ol>
 <h4 id="思考-1">思考：</h4>
-<p>就是两个字符串是不是有完全一样的字符，可以用上一个题的思路，分别用两个字符串去保存两个数组。时间复杂度 O(n), 空间复杂度O(n)</p>
+<p>就是两个字符串是不是有完全一样的字符，可以用上一个题的思路，分别用两个字符串去保存两个数组。时间复杂度 O(n), 空间复杂度 O(n)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isPermutation</span><span style="color:#f92672">(</span>String s1<span style="color:#f92672">,</span> String s2<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
     <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>s1<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span>s2<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
@@ -254,7 +254,7 @@ amortized insertion的runtime是O(1)
 例如:</p>
 <ol>
 <li>大小写要不要区分</li>
-<li>字符一样但是排列过的算不算，例如GOD与DOG</li>
+<li>字符一样但是排列过的算不算，例如 GOD 与 DOG</li>
 <li>空格算不算一个字符</li>
 </ol>
 <p>让我们假设需要区分大小写，而且空格也算字符。
@@ -272,7 +272,7 @@ Solution1:
     <span style="color:#66d9ef">return</span> sort<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>sort<span style="color:#f92672">(</span>t<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Solution2:
-思路和我的很像，但是用一个array就可以实现了</p>
+思路和我的很像，但是用一个 array 就可以实现了</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">permutation</span><span style="color:#f92672">(</span>String s<span style="color:#f92672">,</span> String t<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
     <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span>t<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
@@ -294,10 +294,175 @@ Solution1:
 </code></pre></div><p>总结经验(1/20)：
 没有考虑到要向面试官确认需求！！！</p>
 <ol start="3">
-<li>把一个字符串里的空格替代成为‘%20’</li>
+<li>把一个字符串里的空格替代成为‘%20’
+解法是遍历两次，然后从末尾开始加数据</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> replaceSpace
-</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">replaceSpaces</span><span style="color:#f92672">(</span><span style="color:#66d9ef">char</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> str<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> trueLength<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> spaceCount <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>trueLength<span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>str<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            spaceCount<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    index <span style="color:#f92672">=</span> trueLength <span style="color:#f92672">+</span> spaceCount<span style="color:#f92672">*</span>2<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>trueLength <span style="color:#f92672">&lt;</span> str<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        str<span style="color:#f92672">[</span>trueLenght<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>i <span style="color:#f92672">=</span> trueLength <span style="color:#f92672">-</span> 1<span style="color:#f92672">;</span>i<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>i<span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>str<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            str<span style="color:#f92672">[</span>index <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;0&#39;</span><span style="color:#f92672">;</span>
+            str<span style="color:#f92672">[</span>index <span style="color:#f92672">-</span> 2<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2&#39;</span><span style="color:#f92672">;</span>
+            str<span style="color:#f92672">[</span>index <span style="color:#f92672">-</span> 3<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;%&#39;</span><span style="color:#f92672">;</span>
+            index <span style="color:#f92672">=</span> index <span style="color:#f92672">-</span> 3<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+            str<span style="color:#f92672">[</span>index <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> str<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+            index<span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ol start="4">
+<li>确认一个字符串可不可以组成回文字符串
+解法 1：
+用一个 hashtable 来存下每个字符出现的次数，之后进行统计。如果出现第二次技术个，就退出</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isPermutationOfPalindrome</span><span style="color:#f92672">(</span>String phrase<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> table <span style="color:#f92672">=</span> buildCharFrequencyTable<span style="color:#f92672">(</span>phrase<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> checkMaxOndOdd<span style="color:#f92672">(</span>table<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// Check that no more than one character has an odd(奇数) count.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">checkMaxOneOdd</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> table<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">boolean</span> foundOdd <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> count<span style="color:#f92672">:</span>table<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>count<span style="color:#f92672">%</span>2 <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>foundOdd<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+            foundOdd <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+
+<span style="color:#75715e">// Map each character to a number.
+</span><span style="color:#75715e"></span><span style="color:#75715e">// a -&gt; 0, b -&gt; 1, c-&gt;2 and etc.
+</span><span style="color:#75715e"></span><span style="color:#75715e">// This ia case insensitive, Non-letter characters map to -1
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getCharNumber</span><span style="color:#f92672">(</span>Character c<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> Character<span style="color:#f92672">.</span><span style="color:#a6e22e">getNumericValue</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> z <span style="color:#f92672">=</span> Character<span style="color:#f92672">.</span><span style="color:#a6e22e">getNumericValue</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;z&#39;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> Character<span style="color:#f92672">.</span><span style="color:#a6e22e">getNumericValue</span><span style="color:#f92672">(</span>c<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>a<span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span>val <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> val <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span>z<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> val <span style="color:#f92672">-</span> a<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// count how many times each character appears
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> <span style="color:#a6e22e">buildCharFrequencyTable</span><span style="color:#f92672">(</span>String phrase<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> table  <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>Character<span style="color:#f92672">.</span><span style="color:#a6e22e">getNumericValue</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;z&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span> Character<span style="color:#f92672">.</span><span style="color:#a6e22e">getNumericValue</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> 1<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">char</span> c <span style="color:#f92672">:</span> phrase<span style="color:#f92672">.</span><span style="color:#a6e22e">toCharArray</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> getCharNumber<span style="color:#f92672">(</span>c<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>x<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#f92672">-</span>1<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            table<span style="color:#f92672">[</span>x<span style="color:#f92672">]</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> table<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>解法 2：由于时间复杂度不可以再进行优化，所以可以优化空间复杂度</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isPermutationOfPalindrome</span><span style="color:#f92672">(</span>String phrase<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> countOdd <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> table  <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>Character<span style="color:#f92672">.</span><span style="color:#a6e22e">getNumericValue</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;z&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span> Character<span style="color:#f92672">.</span><span style="color:#a6e22e">getNumericValue</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> 1<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">char</span> c <span style="color:#f92672">:</span> phrase<span style="color:#f92672">.</span><span style="color:#a6e22e">toCharArray</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> getCharNumber<span style="color:#f92672">(</span>c<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>x<span style="color:#f92672">!</span><span style="color:#f92672">=</span>1<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            table<span style="color:#f92672">[</span>x<span style="color:#f92672">]</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>table<span style="color:#f92672">[</span>x<span style="color:#f92672">]</span><span style="color:#f92672">%</span>2 <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+                countOdd<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+                countOdd<span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> countOdd <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span>1<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>解法 3：不使用一个 table 来存，只用一个整数，每一位（0 或者 1）代表偶数个还是奇数个</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isPermutationOfPalindrome</span><span style="color:#f92672">(</span>String phrase<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> bitVector <span style="color:#f92672">=</span> createBitVector<span style="color:#f92672">(</span>phrase<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> bitVector <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0 <span style="color:#f92672">|</span><span style="color:#f92672">|</span> checkExactlyOneBitSet<span style="color:#f92672">(</span>bitVector<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// create a bit vector for the string, for each letter with value i, toggle the ith bit.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">createBitVector</span><span style="color:#f92672">(</span>String phrase<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> bitVector <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">char</span> c <span style="color:#f92672">:</span> phrase<span style="color:#f92672">.</span><span style="color:#a6e22e">toCharArray</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> getCharNumber<span style="color:#f92672">(</span>c<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        bitVector <span style="color:#f92672">=</span> toggle<span style="color:#f92672">(</span>bitVector<span style="color:#f92672">,</span> x<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> bitVector<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// Toggle the ith bit in the integer
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">toggle</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> bitVector<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> index<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>index<span style="color:#f92672">&lt;</span>0<span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> bitVector<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">int</span> mask <span style="color:#f92672">=</span> 1 <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> index<span style="color:#f92672">;</span> <span style="color:#75715e">// 1 向左边移动index位
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>bitVector <span style="color:#f92672">&amp;</span> mask<span style="color:#f92672">)</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0<span style="color:#f92672">)</span><span style="color:#f92672">{</span> <span style="color:#75715e">// 判断原本这里是有奇数个还是偶数个
+</span><span style="color:#75715e"></span>         <span style="color:#75715e">// 原本是0，设置为1
+</span><span style="color:#75715e"></span>        bitVector <span style="color:#f92672">|</span><span style="color:#f92672">=</span> mask<span style="color:#f92672">;</span> <span style="color:#75715e">//新多出来一位奇数
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+         <span style="color:#75715e">// 原本是1，设置为0，不能影响其他位
+</span><span style="color:#75715e"></span>        bitVector <span style="color:#f92672">&amp;</span><span style="color:#f92672">=</span> <span style="color:#f92672">~</span>mask<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> bitVector<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// 记住就行，判断一个二进制数是不是只有1位是1的方法，就是: 这个数本身&amp;(这个数-1）
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">checkExactlyOneBitSet</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> bitVector<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span>bitVector <span style="color:#f92672">&amp;</span> <span style="color:#f92672">(</span>bitVector <span style="color:#f92672">-</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ol start="5">
+<li>判断两个字符串可不可以通过一步变换得到
+思路：要实现一步变换，两个字符串的长度差或者相等，或者是 1
+解法 1：</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">oneEditAway</span><span style="color:#f92672">(</span>String first<span style="color:#f92672">,</span> String second<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>first<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> second<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> oneEditReplace<span style="color:#f92672">(</span>first<span style="color:#f92672">,</span>second<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>first<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span>1 <span style="color:#f92672">=</span><span style="color:#f92672">=</span> second<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> oneEditInsert<span style="color:#f92672">(</span>first<span style="color:#f92672">,</span> second<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>first<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span> 1 <span style="color:#f92672">=</span><span style="color:#f92672">=</span> second<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> oneEditInsert<span style="color:#f92672">(</span>second<span style="color:#f92672">,</span> first<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">oneEditReplace</span><span style="color:#f92672">(</span>String s1<span style="color:#f92672">,</span> String s2<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">boolean</span> foundDifference <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>s1<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>s1<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span>s2<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>foundDifference<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+            foundDifference <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">oneEditInsert</span><span style="color:#f92672">(</span>String s1<span style="color:#f92672">,</span> String s2<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> index1 <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> index2 <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>index2 <span style="color:#f92672">&lt;</span> s2<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> index1 <span style="color:#f92672">&lt;</span> s1<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>s1<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>index1<span style="color:#f92672">)</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> s2<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>index2<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>index1<span style="color:#f92672">!</span><span style="color:#f92672">=</span>index2<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+            index2<span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+            index1<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+            index2<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>解法 2： 只是把两个方法结合到了一起，感觉并不是很有必要</p>
+
     </div>
 
     <div class="post-copyright">

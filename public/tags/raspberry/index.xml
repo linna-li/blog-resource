@@ -6,10 +6,21 @@
     <description>Recent content in raspberry on Linna</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Feb 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://linna-li.github.io/tags/raspberry/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>安装docker</title>
+      <link>https://linna-li.github.io/2021/raspberry-set-docker/</link>
+      <pubDate>Sun, 07 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/raspberry-set-docker/</guid>
+      <description>https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+docker pull ubuntu docker run -it ubuntu
+// 含义是从 9092 导出到 log 吗？ ports: - 9092:9090</description>
+    </item>
     
     <item>
       <title>其他用到的指令</title>
