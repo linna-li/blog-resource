@@ -6,17 +6,26 @@
     <description>Recent content in data-structure on Linna</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Feb 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://linna-li.github.io/tags/data-structure/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>CTCI3-Technical Questions</title>
-      <link>https://linna-li.github.io/2021/ctci3/</link>
+      <title>CTCI4-LinkedList</title>
+      <link>https://linna-li.github.io/2021/ctci4-linkedlist/</link>
+      <pubDate>Sun, 07 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/ctci4-linkedlist/</guid>
+      <description>基础知识  注意null, 头节点，尾节点 Runner技术，即两个指针，一快一慢 递归解法总需要至少O(n)的空间 需要移除元素的时候都要保存一个previous节点  题目  从一个没有排序的链表中删除重复的元素（要求考虑不用多余空间的解法）   解法1: 使用多余空间来保存已经出现过的元素，HashSet就可以  void deleteDups(LinkedListNode n){ // 应该确认一下是不是都是数字  HashSet&amp;lt;Integer&amp;gt; set = new HashSet&amp;lt;Integer&amp;gt;(); LinkedListNode previous = null; while(n!=null){ if(set.contains(n.data)){ previous.next = n.next; }else{ set.add(n.data); previous = n; } } n = n.next; }  解法2: 不使用多余空间，就要对每个节点查一下全部的list，时间复杂度是O(n*n)  void deleteDups(LinkedListNode head){ LinkedListNode current = head; while(current!=null){ LinkedListNode runner = current; while(runner.next!=null){ if(runner.next.data == current.data){ runner.next = runner.next.next; }else{ runner = runner.</description>
+    </item>
+    
+    <item>
+      <title>CTCI3-Arrays and Strings</title>
+      <link>https://linna-li.github.io/2021/ctci3-arrays-and-strings/</link>
       <pubDate>Mon, 18 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://linna-li.github.io/2021/ctci3/</guid>
+      <guid>https://linna-li.github.io/2021/ctci3-arrays-and-strings/</guid>
       <description>String和Array总是可以互换的问题
  实现Hashtables 哈希表（Hashtable）又称为“散置”，Hashtable是会根据索引键的哈希程序代码组织成的索引键（Key）和值（Value）配对的集合。
  根据key计算hash值 map hash值到一个index里（array） 每一个index是一个链表，链表里的每一个元素是 (key, value)  实现ArrayList和Resizable Arrays  Resizable Arrays是可变大小的数组 amortized insertion的runtime是O(1) 在向一个list插入数据的时候，每次满了就会把容量扩大一倍，然后之前的复制到新的里面去

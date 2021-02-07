@@ -1,5 +1,5 @@
 ---
-title: "CTCI3-Technical Questions"
+title: "CTCI3-Arrays and Strings"
 author: "linna.li"
 tags: ["data-structure"]
 categories: ["book"]
@@ -158,7 +158,9 @@ boolean permutation(String s, String t){
 }
 ```
 总结经验(1/20)：
-1. 没有考虑到要向面试官确认需求！！！
-
+没有考虑到要向面试官确认需求！！！
 
 3. 把一个字符串里的空格替代成为‘%20’
+```java
+void replaceSpace
+```
