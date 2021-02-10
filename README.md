@@ -23,6 +23,7 @@ origin https://github.com/linna-li/linna-li.github.io.git (push)
 - git add --all, git commit -m "commit for public", git push
 
 ### How to update locally
+
 - git fetch origin
 - git reset --hard origin/master
 
@@ -30,3 +31,4 @@ origin https://github.com/linna-li/linna-li.github.io.git (push)
 
 - The year folder in public couldn't be updated
 - Theme fold could be removed by mistake
+- Need delete all in public when regenerate

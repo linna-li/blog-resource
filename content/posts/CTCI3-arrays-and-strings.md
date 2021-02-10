@@ -368,3 +368,141 @@ boolean oneEditInsert(String s1, String s2){
 ```
 
 解法 2： 只是把两个方法结合到了一起，感觉并不是很有必要
+
+6. 压缩一个字符串
+   把连续的重复的字符压缩生字符+数字的组合
+   解法 1：用 String 来进行连接，这样效率不高，时间复杂度是 O(n+k\*k), k 是有多少个子序列（用 1+2+3+...k)来计算出的
+   解法 2：用 StringBuilder
+
+```java
+String compress(String str){
+    StringBuilder compressed = new StringBuilder();
+    int countConsecutive = 0;
+    for(int i = 0;i<str.length();i++){
+        countConsecutive++;
+        if(i+1 >= str.length()||str.charAt(i)!=str.charAt(i+1)){
+            compressed.append(str.charAt(i));
+            compressed.append(countConsecutive);
+            countConsecutive = 0;
+        }
+    }
+    return compressed.length() < str.length()?compressed.toString():str;
+}
+```
+
+解法 3：用 StringBuilder
+先检查一遍
+
+```java
+String compress(String str){
+    // check final length and return input string if it would be longer
+    int finalLength = countCompression(str);
+    if(finalLength >= str.length()) return str;
+    StringBuilder compressed = new StringBuilder(finalLength);
+    int countConsecutive = 0;
+    for(int i = 0;i<str.length();i++){
+        countConsecutive++;
+        if(i+1>=str.length()||str.charAt(i)!=str.charAt(i+1)){
+            compressed.append(str.charAt(i));
+            compressed.append(countConsecutive);
+            countConsecutive = 0;
+        }
+    }
+    return compressed.toString();
+}
+int countCompression(String str){
+    int compressedLength = 0;
+    int countConsecutive = 0;
+    for(int i = 0;i<str.length();i++){
+        countConsecutive++;
+        if(i+1>=str.length()||str.charAt(i)!=str.charAt(i+1)){
+            compressedLength += 1 + String.valueOf(countConsecutive).length();
+            countConsecutive = 0;
+        }
+    }
+return compressedLength;
+}
+```
+
+7. 把一个矩阵顺时针旋转 90 度
+   思路:一层一层地进行旋转，从内向外
+   O(n\*n)
+
+```java
+boolean rotate(int[][] matrix){
+    if(matrix.length == 0||matrix.length!=matrix[0].length) return false;
+    int n = matrix.length;
+    for(int layer = 0;layer<n/2;layer++){
+        int first = layer;
+        int last = n-1-layer;
+        for(int i = first; i<last; i++){
+            int offset = i-first;
+            int top = matrix[first][i];
+            // left -> top
+            matrix[first][i] = matrix[last-offset][first];
+            // bottom -> left
+            matrix[last-offset][first] = matrix[last][last-offset];
+            // right -> bottom
+            matrix[last][last-offset] = matrix[i][last];
+            // top -> right
+            matrix[i][last] = top;
+        }
+    }
+    return true;
+}
+```
+
+8.一个矩阵中如果一行中或者一列中有一个 0，则这一行或者这一列全翻为 0
+思路：如果每次发现一个就直接设置的话，会导致多设置(因为分不清是之前为 0 还是被设置成 0)
+可以用一个一模一样大小的矩阵进行记录，但是没有必要用矩阵，用两个数组即可
+
+```java
+void setZeros(int[][] matrix) {
+    boolean[] row = new boolean[matrix.length];
+    boolean[] column = new boolean[matrix[0].length];
+
+    for(int i = 0;i<matrix.length;i++){
+       for(int j = 0;j<matrix[0].length;j++){
+           if(matrix[i][j] == 0){
+              row[i] = true;
+              column[j] = true;
+            }
+       }
+   }
+for(int i = 0;i< row.length;i++){
+    if(row[i]) nullifyRow(matrix,i);
+}
+for(int i = 0;i< column.length;i++){
+    if(row[i]) nullifyColumn(matrix,i);
+}
+}
+void nullifyRow(int[][] matrix, int row){
+    for(int j = 0;i<matrix[0].length;j++){
+        matrix[row][j] = 0;
+    }
+}
+
+void nullifyColumn(int[][] matrix, int col){
+    for(int j = 0;i<matrix.length;j++){
+        matrix[i][col] = 0;
+    }
+}
+```
+
+解法 2：如果要求 O(1)的空间，可以先用两个值记录下来第一行和第一列有没有 0，然后用这两行来存储后面的情况
+
+9. 判断 s2 是不是 s1 的一个旋转, 而且只能用一次 subString 函数
+   例如 S1 = "waterBottle" = xy, S2 = "erBottlewat" = yx
+   x = erBottle, y = wat
+   所以如果是一个旋转的话，s2（即 yx）一定是 S1S1(即 xyxy) 的一个子序列
+
+```java
+   boolean isRotation(String s1, String s2){
+       int length = s1.length();
+       if(len == s2.length() && len > 0){
+           String s1s1 = s1 + s1;
+           return isSubString(s1s1, s2);
+       }
+    return false;
+   }
+```

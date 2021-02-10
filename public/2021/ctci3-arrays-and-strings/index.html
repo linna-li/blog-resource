@@ -57,7 +57,7 @@
     "datePublished": "2021-01-18 00:00:00 \x2b0000 UTC",
     "dateModified" : "2021-01-18 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/linna-li.github.io\/2021\/ctci3-arrays-and-strings\/",
-    "wordCount" : "880",
+    "wordCount" : "1235",
     "keywords" : [ "data-structure", "Linna"]
 }
 </script>
@@ -462,7 +462,130 @@ Solution1:
     <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>解法 2： 只是把两个方法结合到了一起，感觉并不是很有必要</p>
+<ol start="6">
+<li>压缩一个字符串
+把连续的重复的字符压缩生字符+数字的组合
+解法 1：用 String 来进行连接，这样效率不高，时间复杂度是 O(n+k*k), k 是有多少个子序列（用 1+2+3+&hellip;k)来计算出的
+解法 2：用 StringBuilder</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String <span style="color:#a6e22e">compress</span><span style="color:#f92672">(</span>String str<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    StringBuilder compressed <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> countConsecutive <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        countConsecutive<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>i<span style="color:#f92672">+</span>1 <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> str<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">|</span><span style="color:#f92672">|</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            compressed<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            compressed<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span>countConsecutive<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            countConsecutive <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> compressed<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">&lt;</span> str<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">?</span>compressed<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">:</span>str<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>解法 3：用 StringBuilder
+先检查一遍</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String <span style="color:#a6e22e">compress</span><span style="color:#f92672">(</span>String str<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#75715e">// check final length and return input string if it would be longer
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> finalLength <span style="color:#f92672">=</span> countCompression<span style="color:#f92672">(</span>str<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>finalLength <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> str<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> str<span style="color:#f92672">;</span>
+    StringBuilder compressed <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder<span style="color:#f92672">(</span>finalLength<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> countConsecutive <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        countConsecutive<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>i<span style="color:#f92672">+</span>1<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">|</span><span style="color:#f92672">|</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            compressed<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            compressed<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span>countConsecutive<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            countConsecutive <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> compressed<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">countCompression</span><span style="color:#f92672">(</span>String str<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> compressedLength <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> countConsecutive <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        countConsecutive<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>i<span style="color:#f92672">+</span>1<span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">|</span><span style="color:#f92672">|</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span>str<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            compressedLength <span style="color:#f92672">+</span><span style="color:#f92672">=</span> 1 <span style="color:#f92672">+</span> String<span style="color:#f92672">.</span><span style="color:#a6e22e">valueOf</span><span style="color:#f92672">(</span>countConsecutive<span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            countConsecutive <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#66d9ef">return</span> compressedLength<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ol start="7">
+<li>把一个矩阵顺时针旋转 90 度
+思路:一层一层地进行旋转，从内向外
+O(n*n)</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">rotate</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> matrix<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>matrix<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0<span style="color:#f92672">|</span><span style="color:#f92672">|</span>matrix<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span>matrix<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> matrix<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> layer <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>layer<span style="color:#f92672">&lt;</span>n<span style="color:#f92672">/</span>2<span style="color:#f92672">;</span>layer<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span> first <span style="color:#f92672">=</span> layer<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> last <span style="color:#f92672">=</span> n<span style="color:#f92672">-</span>1<span style="color:#f92672">-</span>layer<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> first<span style="color:#f92672">;</span> i<span style="color:#f92672">&lt;</span>last<span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">int</span> offset <span style="color:#f92672">=</span> i<span style="color:#f92672">-</span>first<span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">int</span> top <span style="color:#f92672">=</span> matrix<span style="color:#f92672">[</span>first<span style="color:#f92672">]</span><span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+            <span style="color:#75715e">// left -&gt; top
+</span><span style="color:#75715e"></span>            matrix<span style="color:#f92672">[</span>first<span style="color:#f92672">]</span><span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> matrix<span style="color:#f92672">[</span>last<span style="color:#f92672">-</span>offset<span style="color:#f92672">]</span><span style="color:#f92672">[</span>first<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+            <span style="color:#75715e">// bottom -&gt; left
+</span><span style="color:#75715e"></span>            matrix<span style="color:#f92672">[</span>last<span style="color:#f92672">-</span>offset<span style="color:#f92672">]</span><span style="color:#f92672">[</span>first<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> matrix<span style="color:#f92672">[</span>last<span style="color:#f92672">]</span><span style="color:#f92672">[</span>last<span style="color:#f92672">-</span>offset<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+            <span style="color:#75715e">// right -&gt; bottom
+</span><span style="color:#75715e"></span>            matrix<span style="color:#f92672">[</span>last<span style="color:#f92672">]</span><span style="color:#f92672">[</span>last<span style="color:#f92672">-</span>offset<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> matrix<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">[</span>last<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+            <span style="color:#75715e">// top -&gt; right
+</span><span style="color:#75715e"></span>            matrix<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">[</span>last<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> top<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>8.一个矩阵中如果一行中或者一列中有一个 0，则这一行或者这一列全翻为 0
+思路：如果每次发现一个就直接设置的话，会导致多设置(因为分不清是之前为 0 还是被设置成 0)
+可以用一个一模一样大小的矩阵进行记录，但是没有必要用矩阵，用两个数组即可</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setZeros</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> matrix<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> row <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span>matrix<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> column <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span>matrix<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">]</span><span style="color:#f92672">;</span>
 
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>matrix<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+       <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>j<span style="color:#f92672">&lt;</span>matrix<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>j<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+           <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>matrix<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">[</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+              row<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+              column<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+       <span style="color:#f92672">}</span>
+   <span style="color:#f92672">}</span>
+<span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span> row<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>row<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span> nullifyRow<span style="color:#f92672">(</span>matrix<span style="color:#f92672">,</span>i<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span> column<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>row<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span> nullifyColumn<span style="color:#f92672">(</span>matrix<span style="color:#f92672">,</span>i<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">nullifyRow</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> matrix<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> row<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>matrix<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>j<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        matrix<span style="color:#f92672">[</span>row<span style="color:#f92672">]</span><span style="color:#f92672">[</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">nullifyColumn</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> matrix<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> col<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>matrix<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>j<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        matrix<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">[</span>col<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>解法 2：如果要求 O(1)的空间，可以先用两个值记录下来第一行和第一列有没有 0，然后用这两行来存储后面的情况</p>
+<ol start="9">
+<li>判断 s2 是不是 s1 的一个旋转, 而且只能用一次 subString 函数
+例如 S1 = &ldquo;waterBottle&rdquo; = xy, S2 = &ldquo;erBottlewat&rdquo; = yx
+x = erBottle, y = wat
+所以如果是一个旋转的话，s2（即 yx）一定是 S1S1(即 xyxy) 的一个子序列</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">   <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isRotation</span><span style="color:#f92672">(</span>String s1<span style="color:#f92672">,</span> String s2<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+       <span style="color:#66d9ef">int</span> length <span style="color:#f92672">=</span> s1<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+       <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>len <span style="color:#f92672">=</span><span style="color:#f92672">=</span> s2<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> len <span style="color:#f92672">&gt;</span> 0<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+           String s1s1 <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> s1<span style="color:#f92672">;</span>
+           <span style="color:#66d9ef">return</span> isSubString<span style="color:#f92672">(</span>s1s1<span style="color:#f92672">,</span> s2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+       <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+   <span style="color:#f92672">}</span>
+</code></pre></div>
     </div>
 
     <div class="post-copyright">
