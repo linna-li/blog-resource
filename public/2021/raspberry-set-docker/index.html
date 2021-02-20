@@ -46,7 +46,7 @@
     "articleSection" : "posts",
     "name" : "安装docker",
     "headline" : "安装docker",
-    "description" : "https:\/\/www.digitalocean.com\/community\/tutorials\/how-to-install-and-use-docker-on-ubuntu-20-04\ndocker pull ubuntu docker run -it ubuntu\n\/\/ 含义是从 9092 导出到 log 吗？ ports: - 9092:9090",
+    "description" : "https:\/\/www.digitalocean.com\/community\/tutorials\/how-to-install-and-use-docker-on-ubuntu-20-04\ndocker pull ubuntu docker run -it ubuntu\nhttps:\/\/docs.docker.com\/config\/daemon\/prometheus\/ 导出 metrics 并且重启 docker\n{ \x26quot;metrics-addr\x26quot; : \x26quot;127.0.0.1:9323\x26quot;, \x26quot;experimental\x26quot; : true } 开放端口 9323 我的理解是在一个 service 中，这个 service 相当于另外的 server docker 道出了 9323 的 metics 给普罗米修斯，普罗米修斯统一用公共接口 9096 来导出到真正的外部 但是为什么 9323 会失败呢？ mount 是把我创建在 temp 中的文件给普罗米修斯用\nhttps:\/\/www.thomas-krenn.com\/en\/wiki\/Perl_warning_Setting_locale_failed_in_Debian\n\/\/ 在一个 container 中的配置 （含义是从 9092 导出到 log 吗？） ports: - 9092:9090",
     "inLanguage" : "en-us",
     "author" : "linna.li",
     "creator" : "linna.li",
@@ -57,7 +57,7 @@
     "datePublished": "2021-02-07 00:00:00 \x2b0000 UTC",
     "dateModified" : "2021-02-07 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/linna-li.github.io\/2021\/raspberry-set-docker\/",
-    "wordCount" : "17",
+    "wordCount" : "57",
     "keywords" : [ "raspberry", "Linna"]
 }
 </script>
@@ -145,7 +145,19 @@
           <p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04">https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04</a></p>
 <p>docker pull ubuntu
 docker run -it ubuntu</p>
-<p>// 含义是从 9092 导出到 log 吗？
+<p><a href="https://docs.docker.com/config/daemon/prometheus/">https://docs.docker.com/config/daemon/prometheus/</a>
+导出 metrics 并且重启 docker</p>
+<pre><code>{
+  &quot;metrics-addr&quot; : &quot;127.0.0.1:9323&quot;,
+  &quot;experimental&quot; : true
+}
+</code></pre><p>开放端口 9323
+我的理解是在一个 service 中，这个 service 相当于另外的 server
+docker 道出了 9323 的 metics 给普罗米修斯，普罗米修斯统一用公共接口 9096 来导出到真正的外部
+但是为什么 9323 会失败呢？
+mount 是把我创建在 temp 中的文件给普罗米修斯用</p>
+<p><a href="https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian">https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian</a></p>
+<p>// 在一个 container 中的配置 （含义是从 9092 导出到 log 吗？）
 ports: - 9092:9090</p>
 
     </div>
