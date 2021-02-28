@@ -17,7 +17,7 @@
       <pubDate>Sun, 07 Feb 2021 00:00:00 +0000</pubDate>
       
       <guid>https://linna-li.github.io/2021/ctci4-linkedlist/</guid>
-      <description>基础知识  注意null, 头节点，尾节点 Runner技术，即两个指针，一快一慢 递归解法总需要至少O(n)的空间 需要移除元素的时候都要保存一个previous节点  题目  从一个没有排序的链表中删除重复的元素（要求考虑不用多余空间的解法）   解法1: 使用多余空间来保存已经出现过的元素，HashSet就可以  void deleteDups(LinkedListNode n){ // 应该确认一下是不是都是数字  HashSet&amp;lt;Integer&amp;gt; set = new HashSet&amp;lt;Integer&amp;gt;(); LinkedListNode previous = null; while(n!=null){ if(set.contains(n.data)){ previous.next = n.next; }else{ set.add(n.data); previous = n; } } n = n.next; }  解法2: 不使用多余空间，就要对每个节点查一下全部的list，时间复杂度是O(n*n)  void deleteDups(LinkedListNode head){ LinkedListNode current = head; while(current!=null){ LinkedListNode runner = current; while(runner.next!=null){ if(runner.next.data == current.data){ runner.next = runner.next.next; }else{ runner = runner.</description>
+      <description>基础知识  注意 null, 头节点，尾节点 Runner 技术，即两个指针，一快一慢 递归解法总需要至少 O(n)的空间 需要移除元素的时候都要保存一个 previous 节点  题目  从一个没有排序的链表中删除重复的元素（要求考虑不用多余空间的解法）   解法 1: 使用多余空间来保存已经出现过的元素，HashSet 就可以  void deleteDups(LinkedListNode n){ // 应该确认一下是不是都是数字  HashSet&amp;lt;Integer&amp;gt; set = new HashSet&amp;lt;Integer&amp;gt;(); LinkedListNode previous = null; while(n!=null){ if(set.contains(n.data)){ previous.next = n.next; }else{ set.add(n.data); previous = n; } } n = n.next; }  解法 2: 不使用多余空间，就要对每个节点查一下全部的 list，时间复杂度是 O(n*n)  void deleteDups(LinkedListNode head){ LinkedListNode current = head; while(current!=null){ LinkedListNode runner = current; while(runner.</description>
     </item>
     
     <item>
@@ -29,9 +29,11 @@
       <description>https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
 docker pull ubuntu docker run -it ubuntu
 https://docs.docker.com/config/daemon/prometheus/ 导出 metrics 并且重启 docker
-{ &amp;quot;metrics-addr&amp;quot; : &amp;quot;127.0.0.1:9323&amp;quot;, &amp;quot;experimental&amp;quot; : true } 开放端口 9323 我的理解是在一个 service 中，这个 service 相当于另外的 server docker 道出了 9323 的 metics 给普罗米修斯，普罗米修斯统一用公共接口 9096 来导出到真正的外部 但是为什么 9323 会失败呢？ mount 是把我创建在 temp 中的文件给普罗米修斯用
-https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian
-// 在一个 container 中的配置 （含义是从 9092 导出到 log 吗？） ports: - 9092:9090</description>
+{ &amp;quot;metrics-addr&amp;quot; : &amp;quot;127.0.0.1:9323&amp;quot;, &amp;quot;experimental&amp;quot; : true } 开放端口 9323 我的理解是在一个 service 中，这个 service 相当于另外的 server docker 道出了 9323 的 metics 给普罗米修斯，普罗米修斯统一用公共接口 9096 来导出到真正的外部 但是为什么 9323 会失败呢？ 是不是需要把接口映射一下？ mount 是把我创建在 temp 中的文件给普罗米修斯用
+https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian https://unix.stackexchange.com/questions/401203/why-root-cant-open-file-for-writing
+sudo systemctl start docker (重新启动 docker)
+只需要到第二步就够了
+为什么 grafana 找不到 DataSource！</description>
     </item>
     
     <item>

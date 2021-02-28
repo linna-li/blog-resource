@@ -46,7 +46,7 @@
     "articleSection" : "posts",
     "name" : "CTCI4-LinkedList",
     "headline" : "CTCI4-LinkedList",
-    "description" : "基础知识  注意null, 头节点，尾节点 Runner技术，即两个指针，一快一慢 递归解法总需要至少O(n)的空间 需要移除元素的时候都要保存一个previous节点  题目  从一个没有排序的链表中删除重复的元素（要求考虑不用多余空间的解法）   解法1: 使用多余空间来保存已经出现过的元素，HashSet就可以  void deleteDups(LinkedListNode n){ \/\/ 应该确认一下是不是都是数字  HashSet\x26lt;Integer\x26gt; set = new HashSet\x26lt;Integer\x26gt;(); LinkedListNode previous = null; while(n!=null){ if(set.contains(n.data)){ previous.next = n.next; }else{ set.add(n.data); previous = n; } } n = n.next; }  解法2: 不使用多余空间，就要对每个节点查一下全部的list，时间复杂度是O(n*n)  void deleteDups(LinkedListNode head){ LinkedListNode current = head; while(current!=null){ LinkedListNode runner = current; while(runner.next!=null){ if(runner.next.data == current.data){ runner.next = runner.next.next; }else{ runner = runner.",
+    "description" : "基础知识  注意 null, 头节点，尾节点 Runner 技术，即两个指针，一快一慢 递归解法总需要至少 O(n)的空间 需要移除元素的时候都要保存一个 previous 节点  题目  从一个没有排序的链表中删除重复的元素（要求考虑不用多余空间的解法）   解法 1: 使用多余空间来保存已经出现过的元素，HashSet 就可以  void deleteDups(LinkedListNode n){ \/\/ 应该确认一下是不是都是数字  HashSet\x26lt;Integer\x26gt; set = new HashSet\x26lt;Integer\x26gt;(); LinkedListNode previous = null; while(n!=null){ if(set.contains(n.data)){ previous.next = n.next; }else{ set.add(n.data); previous = n; } } n = n.next; }  解法 2: 不使用多余空间，就要对每个节点查一下全部的 list，时间复杂度是 O(n*n)  void deleteDups(LinkedListNode head){ LinkedListNode current = head; while(current!=null){ LinkedListNode runner = current; while(runner.",
     "inLanguage" : "en-us",
     "author" : "linna.li",
     "creator" : "linna.li",
@@ -57,7 +57,7 @@
     "datePublished": "2021-02-07 00:00:00 \x2b0000 UTC",
     "dateModified" : "2021-02-07 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/linna-li.github.io\/2021\/ctci4-linkedlist\/",
-    "wordCount" : "337",
+    "wordCount" : "836",
     "keywords" : [ "data-structure", "Linna"]
 }
 </script>
@@ -144,17 +144,17 @@
 
           <h1 id="基础知识">基础知识</h1>
 <ol>
-<li>注意null, 头节点，尾节点</li>
-<li>Runner技术，即两个指针，一快一慢</li>
-<li>递归解法总需要至少O(n)的空间</li>
-<li>需要移除元素的时候都要保存一个previous节点</li>
+<li>注意 null, 头节点，尾节点</li>
+<li>Runner 技术，即两个指针，一快一慢</li>
+<li>递归解法总需要至少 O(n)的空间</li>
+<li>需要移除元素的时候都要保存一个 previous 节点</li>
 </ol>
 <h1 id="题目">题目</h1>
 <ol>
 <li>从一个没有排序的链表中删除重复的元素（要求考虑不用多余空间的解法）</li>
 </ol>
 <ul>
-<li>解法1: 使用多余空间来保存已经出现过的元素，HashSet就可以</li>
+<li>解法 1: 使用多余空间来保存已经出现过的元素，HashSet 就可以</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">deleteDups</span><span style="color:#f92672">(</span>LinkedListNode n<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
     <span style="color:#75715e">// 应该确认一下是不是都是数字
@@ -171,7 +171,7 @@
     n <span style="color:#f92672">=</span> n<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><ul>
-<li>解法2: 不使用多余空间，就要对每个节点查一下全部的list，时间复杂度是O(n*n)</li>
+<li>解法 2: 不使用多余空间，就要对每个节点查一下全部的 list，时间复杂度是 O(n*n)</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">deleteDups</span><span style="color:#f92672">(</span>LinkedListNode head<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
     LinkedListNode current <span style="color:#f92672">=</span> head<span style="color:#f92672">;</span>
@@ -188,7 +188,7 @@
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><ol start="2">
-<li>查找倒数第k个节点</li>
+<li>查找倒数第 k 个节点</li>
 </ol>
 <ul>
 <li>
@@ -197,7 +197,7 @@
 <li>
 <p>递归解法</p>
 <ul>
-<li>解法1: 在找到结尾的时候返回, 但是不能返回那个节点，只能输出</li>
+<li>解法 1: 在找到结尾的时候返回, 但是不能返回那个节点，只能输出</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">printKthToLast</span><span style="color:#f92672">(</span>LinkedListNode head<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> k<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
     <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>head<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
@@ -210,7 +210,7 @@
     <span style="color:#66d9ef">return</span> index<span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><ul>
-<li>解法2:</li>
+<li>解法 2:</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">node<span style="color:#f92672">*</span> <span style="color:#a6e22e">nthToLast</span>(node<span style="color:#f92672">*</span> head, <span style="color:#66d9ef">int</span> k, <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> i){
     <span style="color:#66d9ef">if</span>(head<span style="color:#f92672">=</span><span style="color:#f92672">=</span>NULL){
@@ -230,7 +230,7 @@ node<span style="color:#f92672">*</span> <span style="color:#a6e22e">nthToLast</
     <span style="color:#66d9ef">return</span> nthTolast(head, k, i);
 }
 </code></pre></div><ul>
-<li>解法3:</li>
+<li>解法 3:</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// 用一个class来保存counter和index
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Index</span> <span style="color:#f92672">{</span>
@@ -253,7 +253,7 @@ LinkedListNode <span style="color:#a6e22e">kthToLast</span><span style="color:#f
 <span style="color:#f92672">}</span>
 </code></pre></div></li>
 <li>
-<p>非递归解法（两个指针）　</p>
+<p>非递归解法（两个指针）</p>
 </li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">LinkedListNode <span style="color:#a6e22e">nthToLast</span><span style="color:#f92672">(</span>LinkedListNode head<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> k<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
@@ -286,8 +286,8 @@ LinkedListNode <span style="color:#a6e22e">kthToLast</span><span style="color:#f
     <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><ol start="4">
-<li>给一个list和一个目标值，要求调整这个list按照目标值分成两部，目标值在后半部分，不用排序。
-// 可以直接新建两个linkedlist，先分开，然后连起来
+<li>给一个 list 和一个目标值，要求调整这个 list 按照目标值分成两部，目标值在后半部分，不用排序。
+// 可以直接新建两个 linkedlist，先分开，然后连起来
 // 或者直接向 <em>头尾两个方向</em> 加上节点</li>
 </ol>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">LinkedListNode <span style="color:#a6e22e">partition</span><span style="color:#f92672">(</span>LinkedListNode node<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> x<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -308,7 +308,218 @@ LinkedListNode <span style="color:#a6e22e">kthToLast</span><span style="color:#f
     tail<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
     <span style="color:#66d9ef">return</span> head<span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
+</code></pre></div><ol start="5">
+<li>给两个链表代表两个倒序的数字，求这两个数字的和
+// 思路：用递归。注意进位最多为 1；递归的返回值是当前位置上的数</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">LinkedListNode <span style="color:#a6e22e">addLists</span><span style="color:#f92672">(</span>LinkedListNode l1<span style="color:#f92672">,</span> LinkedListNode l2<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> carry<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>l1<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> l2<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> carry<span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
+    LinkedListNode result <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedListNode<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> carry<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>l1<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        value<span style="color:#f92672">+</span><span style="color:#f92672">=</span>l1<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>l2<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        value<span style="color:#f92672">+</span><span style="color:#f92672">=</span>l2<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    result<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> value<span style="color:#f92672">%</span>10<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>l1<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">|</span><span style="color:#f92672">|</span>l2<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        LinkedListNode more <span style="color:#f92672">=</span> addLists<span style="color:#f92672">(</span>l1<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">?</span><span style="color:#66d9ef">null</span><span style="color:#f92672">:</span>l1<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">,</span> l2<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">?</span><span style="color:#66d9ef">null</span><span style="color:#f92672">:</span>l2<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">,</span> value <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span>10<span style="color:#f92672">?</span>1<span style="color:#f92672">:</span>0<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        result<span style="color:#f92672">.</span><span style="color:#a6e22e">setNext</span><span style="color:#f92672">(</span>more<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> result<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>注意如果是正序的，首先是向右对齐的，需要前面填上 0。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PartialSum</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> LinkedListNode sum <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> carry <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+LinkedListNode <span style="color:#a6e22e">addLists</span><span style="color:#f92672">(</span>LinkedListNode l1<span style="color:#f92672">,</span> LinkedListNode l2<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> len1 <span style="color:#f92672">=</span> length<span style="color:#f92672">(</span>l1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> len2 <span style="color:#f92672">=</span> length<span style="color:#f92672">(</span>l2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>len1<span style="color:#f92672">&lt;</span>len2<span style="color:#f92672">&gt;</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        l1 <span style="color:#f92672">=</span> padList<span style="color:#f92672">(</span>l1<span style="color:#f92672">,</span>len2<span style="color:#f92672">-</span>len1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+        l2 <span style="color:#f92672">=</span> padList<span style="color:#f92672">(</span>l2<span style="color:#f92672">,</span>len1<span style="color:#f92672">-</span>len2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+PartialSum sum <span style="color:#f92672">=</span> addListsHelper<span style="color:#f92672">(</span>l1<span style="color:#f92672">,</span>l2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#75715e">// 如果有一个carry value，要把它插入到链表最前面
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>sum<span style="color:#f92672">.</span><span style="color:#a6e22e">carry</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">return</span> sum<span style="color:#f92672">.</span><span style="color:#a6e22e">sum</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+    LinkedListNode result <span style="color:#f92672">=</span> insertBefore<span style="color:#f92672">(</span>sum<span style="color:#f92672">.</span><span style="color:#a6e22e">sum</span><span style="color:#f92672">,</span>sum<span style="color:#f92672">.</span><span style="color:#a6e22e">carry</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> result<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+PartialSum <span style="color:#a6e22e">addListHelper</span><span style="color:#f92672">(</span>LinkedListNode l1<span style="color:#f92672">,</span> LinkedListNode l2<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>l1<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span>l2<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        PartialSum sum <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PartialSum<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> sum<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    PartialSum sum <span style="color:#f92672">=</span> addListsHelper<span style="color:#f92672">(</span>l1<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">,</span>l2<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> sum<span style="color:#f92672">.</span><span style="color:#a6e22e">carry</span> <span style="color:#f92672">+</span> l1<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span> <span style="color:#f92672">+</span> l2<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">;</span>
+    LinkedListNode full_result <span style="color:#f92672">=</span> insertBefore<span style="color:#f92672">(</span>sum<span style="color:#f92672">.</span><span style="color:#a6e22e">sum</span><span style="color:#f92672">,</span> val<span style="color:#f92672">%</span>10<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    sum<span style="color:#f92672">.</span><span style="color:#a6e22e">sum</span> <span style="color:#f92672">=</span> full_result<span style="color:#f92672">;</span>
+    sum<span style="color:#f92672">.</span><span style="color:#a6e22e">carry</span> <span style="color:#f92672">=</span> val<span style="color:#f92672">/</span>10<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> sum<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+LinkedListNode <span style="color:#a6e22e">padList</span><span style="color:#f92672">(</span>LinkedListNode l<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> padding<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    LinkedListNode head <span style="color:#f92672">=</span> l<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>padding<span style="color:#f92672">;</span>i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        head <span style="color:#f92672">=</span> insertBefore<span style="color:#f92672">(</span>head<span style="color:#f92672">,</span>0<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> head<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+LinkedListNode <span style="color:#a6e22e">insertBefore</span><span style="color:#f92672">(</span>LinkedListNode list<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> data<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    LinkedListNode node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedListNode<span style="color:#f92672">(</span>data<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>list<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        node<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> list<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> node<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ol start="6">
+<li>
+<p>检查一个链表是不是回文的
+三种解法：
+解法 1：反转这个链表，与原来的链表进行比较</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isPalindrome</span><span style="color:#f92672">(</span>LinkedListNode head<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    LinkedListNode reversed <span style="color:#f92672">=</span> reverseAndClone<span style="color:#f92672">(</span>head<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> isEuqal<span style="color:#f92672">(</span>head<span style="color:#f92672">,</span> reversed<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+LinkedListNode <span style="color:#a6e22e">reverseAndClone</span><span style="color:#f92672">(</span>LinkedListNode node<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    LinkedListNode head <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>node <span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        LinkedListNode n <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedListNode<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        n<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> head<span style="color:#f92672">;</span>
+        head <span style="color:#f92672">=</span> n<span style="color:#f92672">;</span>
+        node <span style="color:#f92672">=</span> node<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> head<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>解法 2：用快慢指针的方法找到中点，然后弹出来进行比较</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isPalindrome</span><span style="color:#f92672">(</span>LinkedListNode head<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    LinkedListNode fast <span style="color:#f92672">=</span> head<span style="color:#f92672">;</span>
+    LinkedListNode slow <span style="color:#f92672">=</span> head<span style="color:#f92672">;</span>
+
+    Stack<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> stack <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Stack<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>fast<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span>fast<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        stack<span style="color:#f92672">.</span><span style="color:#a6e22e">push</span><span style="color:#f92672">(</span>slow<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        slow <span style="color:#f92672">=</span> slow<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+        fast <span style="color:#f92672">=</span> fast<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#75715e">// slow代表后半部分
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>fast<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        slow <span style="color:#f92672">=</span> slow<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>slow <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span> top <span style="color:#f92672">=</span> stack<span style="color:#f92672">.</span><span style="color:#a6e22e">pop</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">intvalue</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>top<span style="color:#f92672">!</span><span style="color:#f92672">=</span>slow<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        slow <span style="color:#f92672">=</span> slow<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span>java
+解法 3<span style="color:#960050;background-color:#1e0010">：</span>先求出长度<span style="color:#960050;background-color:#1e0010">，</span>然后用递归求解
+<span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isPalindrome</span><span style="color:#f92672">(</span>LinkedListNode head<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> length <span style="color:#f92672">=</span> lengthOfList<span style="color:#f92672">(</span>head<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    Result p <span style="color:#f92672">=</span> isPalindromeRecurse<span style="color:#f92672">(</span>head<span style="color:#f92672">,</span>length<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> p<span style="color:#f92672">.</span><span style="color:#a6e22e">result</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+Result <span style="color:#a6e22e">isPalindromeRecurse</span><span style="color:#f92672">(</span>LinkedListNode head<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> length<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>head<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span> <span style="color:#f92672">|</span><span style="color:#f92672">|</span> length <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span>0<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Result<span style="color:#f92672">(</span>head<span style="color:#f92672">,</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>length <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Result<span style="color:#f92672">(</span>head<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">,</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    Result res <span style="color:#f92672">=</span> isPalindromeRecurse<span style="color:#f92672">(</span>head<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">,</span> length<span style="color:#f92672">-</span>2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#f92672">!</span>res<span style="color:#f92672">.</span><span style="color:#a6e22e">result</span> <span style="color:#f92672">|</span><span style="color:#f92672">|</span> res<span style="color:#f92672">.</span><span style="color:#a6e22e">node</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> res<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    res<span style="color:#f92672">.</span><span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>head<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> res<span style="color:#f92672">.</span><span style="color:#a6e22e">node</span><span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    res<span style="color:#f92672">.</span><span style="color:#a6e22e">node</span> <span style="color:#f92672">=</span> res<span style="color:#f92672">.</span><span style="color:#a6e22e">node</span><span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">return</span> res<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">lengthOfList</span><span style="color:#f92672">(</span>LinkedListNode n<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> size <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>n<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        size<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+        n <span style="color:#f92672">=</span> n<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> size<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>
+<p>检查两个链表是不是相交的
+思路 1：可以直接用一个 HashSet，把第一个的点放进去，然后遍历第二个链表
+思路 2：首先得到长度，然后去相同的位置开始找到第一个相同的位置，找到之后比较是不是后面完全一致的</p>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">LinkedListNode <span style="color:#a6e22e">findIntersection</span><span style="color:#f92672">(</span>LinkedListNode list1<span style="color:#f92672">,</span>LinkedListNode list2<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>list1 <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">|</span><span style="color:#f92672">|</span> list2 <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    Result result1 <span style="color:#f92672">=</span> getTailAndSize<span style="color:#f92672">(</span>list1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    Result result2 <span style="color:#f92672">=</span> getTailAndSize<span style="color:#f92672">(</span>list2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>result1<span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> result2<span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    LinkedListNode shorter <span style="color:#f92672">=</span> result1<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">&lt;</span> result2<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">?</span> list1 <span style="color:#f92672">:</span> list2<span style="color:#f92672">;</span>
+    LinkedListNode longer <span style="color:#f92672">=</span> result1<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">&lt;</span> result2<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">?</span> list2<span style="color:#f92672">:</span>list1<span style="color:#f92672">;</span>
+
+    longer <span style="color:#f92672">=</span> getKthNode<span style="color:#f92672">(</span>longer<span style="color:#f92672">,</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">abs</span><span style="color:#f92672">(</span>result1<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">-</span>result2<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>shorter <span style="color:#f92672">!</span><span style="color:#f92672">=</span> longer<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        shorter <span style="color:#f92672">=</span> shorter<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+        longer <span style="color:#f92672">=</span> longer<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> longer<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+
+</code></pre></div><ol start="8">
+<li>检查一个链表中是不是有环的
+思路： a.如果有环，那么快慢指针必定相交（可以用反证法来证明慢指针不会刚好跳过快指针）
+b.延伸：找到环的起点。记住相遇的点回到环入口的距离 = 链表开始的位置到环的入口</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">LinkedListNode <span style="color:#a6e22e">findBeginning</span><span style="color:#f92672">(</span>LinkedListNode head<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    LinkedListNode slow <span style="color:#f92672">=</span> head<span style="color:#f92672">;</span>
+    LinkedListNode fast <span style="color:#f92672">=</span> head<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>fast<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span>fast<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        slow <span style="color:#f92672">=</span> slow<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+        fast <span style="color:#f92672">=</span> fast<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>slow <span style="color:#f92672">=</span><span style="color:#f92672">=</span> fast<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>fast<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">|</span><span style="color:#f92672">|</span>fast<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    slow <span style="color:#f92672">=</span> head<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>slow <span style="color:#f92672">!</span><span style="color:#f92672">=</span> fast<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        slow <span style="color:#f92672">=</span> slow<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#960050;background-color:#1e0010">；</span>
+        fast <span style="color:#f92672">=</span> fast<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> fast<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
 </code></pre></div>
     </div>
 
