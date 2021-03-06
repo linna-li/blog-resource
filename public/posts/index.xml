@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Linna</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://linna-li.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CTCI5-stacks-and-queues</title>
+      <link>https://linna-li.github.io/2021/cict5-stacks-and-queues/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/cict5-stacks-and-queues/</guid>
+      <description>基础知识  注意栈的问题要检查有没有满，是不是空 shift 的意思是 对齐（移动）  题目  用一个数组实现三个栈   解法 1: 如果可以三个栈的大小都固定，可以直接把数组划分成三部分即可  class FixedMultiStack { private int numberOfStacks = 3; private int stackCapacity; private int[] values; private int[] sizes; public FixedMultiStack(int stackSize){ stackCapacity = stackSize; values = new int[stackSize * numberOfStacks]; sizes = new int[numberOfStacks]; } public void push(int stackNum, int value) throws FullStackException { if(isFull(stackNum)){ throw new FullStackException(); } sizes[stackNum]++; values[indexOfTop(stackNum)] = value; } private int indexOfTop(int stackNum){ // 开始位置  int offSet = stackNum * stackCapacity; int size = size[stackNum]; return offset + size - 1; } public int peek(int stackNum){ if(isEmpty(stackNum)){ throw new EmptyStackException(); } return values[indexOfTop(stackNum)]; } public int pop(int stackNum){ if(isEmpty(stackNum)){ throw new EmptyStackException(); } int topIndex = indexOfTop(stackNum); int value = values[topIndex]; values[topIndex]=0; sizes[stackNum]--; return value; } }  解法 2: 要想更加灵活，如果一个满了可以 expand 扩充，扩充的意思就是去拿下一个 stack 的一个空间（下一个 stack 就少了一个空间）同时需要把下一 stack 进行移动（shift）如果下一个 stack 也满了就要去下下一个 stack 拿，两个 stack 都要进行 shift，以此类推。 Note: java 在进行取余操作的时候会返回负数  private void (int stackNum){ shift((stack+1)%info.</description>
+    </item>
     
     <item>
       <title>CTCI4-LinkedList</title>
