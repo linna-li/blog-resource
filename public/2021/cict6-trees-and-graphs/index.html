@@ -9,9 +9,9 @@
   <meta name="description" content="Study Note">
   <meta name="keywords" content="work server-side">
   
-  <link rel="prev" href="https://linna-li.github.io/2021/raspberry-set-other/" />
-  <link rel="next" href="https://linna-li.github.io/2021/ctci4-linkedlist/" />
-  <link rel="canonical" href="https://linna-li.github.io/2021/raspberry-set-docker/" />
+  <link rel="prev" href="https://linna-li.github.io/2021/cict5-stacks-and-queues/" />
+  <link rel="next" href="https://linna-li.github.io/2021/raspberry-set-mongodb/" />
+  <link rel="canonical" href="https://linna-li.github.io/2021/cict6-trees-and-graphs/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           安装docker | Linna
+           CTCI6-Trees-and-graphs | Linna
        
   </title>
-  <meta name="title" content="安装docker | Linna">
+  <meta name="title" content="CTCI6-Trees-and-graphs | Linna">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,9 +44,9 @@
          "@id": "https:\/\/linna-li.github.io"
     },
     "articleSection" : "posts",
-    "name" : "安装docker",
-    "headline" : "安装docker",
-    "description" : "https:\/\/www.digitalocean.com\/community\/tutorials\/how-to-install-and-use-docker-on-ubuntu-20-04\ndocker pull ubuntu docker run -it ubuntu\nhttps:\/\/docs.docker.com\/config\/daemon\/prometheus\/ 导出 metrics 并且重启 docker\n{ \x26quot;metrics-addr\x26quot; : \x26quot;127.0.0.1:9323\x26quot;, \x26quot;experimental\x26quot; : true } 开放端口 9323 我的理解是在一个 service 中，这个 service 相当于另外的 server docker 道出了 9323 的 metics 给普罗米修斯，普罗米修斯统一用公共接口 9096 来导出到真正的外部 但是为什么 9323 会失败呢？ 是不是需要把接口映射一下？ mount 是把我创建在 temp 中的文件给普罗米修斯用\nhttps:\/\/www.thomas-krenn.com\/en\/wiki\/Perl_warning_Setting_locale_failed_in_Debian https:\/\/unix.stackexchange.com\/questions\/401203\/why-root-cant-open-file-for-writing\nsudo systemctl start docker (重新启动 docker)\n只需要到第二步就够了\n run your prometheus in docker instead of on the native host. collect from node_exporter of the raspberry pi number 1 is actually two separate ones: 1a: run your prometheus in docker instead of on the native host 1b: use that prometheus to collect from node_exporter of the raspberry pi collect metrics about the docker engine collect metrics about each docker container  ",
+    "name" : "CTCI6-Trees-and-graphs",
+    "headline" : "CTCI6-Trees-and-graphs",
+    "description" : "基础知识  树是图的一种 二叉搜索树： 左边的小于一个数，小于右边的 平衡树   ",
     "inLanguage" : "en-us",
     "author" : "linna.li",
     "creator" : "linna.li",
@@ -54,11 +54,11 @@
     "accountablePerson" : "linna.li",
     "copyrightHolder" : "linna.li",
     "copyrightYear" : "2021",
-    "datePublished": "2021-02-07 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2021-02-07 00:00:00 \x2b0000 UTC",
-    "url" : "https:\/\/linna-li.github.io\/2021\/raspberry-set-docker\/",
-    "wordCount" : "115",
-    "keywords" : [ "raspberry", "Linna"]
+    "datePublished": "2021-03-08 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2021-03-08 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/linna-li.github.io\/2021\/cict6-trees-and-graphs\/",
+    "wordCount" : "5",
+    "keywords" : [ "data-structure", "Linna"]
 }
 </script>
 
@@ -112,16 +112,16 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">安装docker</h1>
+        <h1 class="post-title" itemprop="name headline">CTCI6-Trees-and-graphs</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://linna-li.github.io" rel="author">linna.li</a> with ♥ 
                 <span class="post-time">
-                on <time datetime=2021-02-07 itemprop="datePublished">February 7, 2021</time>
+                on <time datetime=2021-03-08 itemprop="datePublished">March 8, 2021</time>
                 </span>
                 in
                 <i class="iconfont icon-folder"></i>
                 <span class="post-category">
-                        <a href="https://linna-li.github.io/categories/note/"> note </a>
+                        <a href="https://linna-li.github.io/categories/book/"> book </a>
                         
                 </span>
         </div>
@@ -142,31 +142,12 @@
           
           
 
-          <p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04">https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04</a></p>
-<p>docker pull ubuntu
-docker run -it ubuntu</p>
-<p><a href="https://docs.docker.com/config/daemon/prometheus/">https://docs.docker.com/config/daemon/prometheus/</a>
-导出 metrics 并且重启 docker</p>
-<pre><code>{
-  &quot;metrics-addr&quot; : &quot;127.0.0.1:9323&quot;,
-  &quot;experimental&quot; : true
-}
-</code></pre><p>开放端口 9323
-我的理解是在一个 service 中，这个 service 相当于另外的 server
-docker 道出了 9323 的 metics 给普罗米修斯，普罗米修斯统一用公共接口 9096 来导出到真正的外部
-但是为什么 9323 会失败呢？ 是不是需要把接口映射一下？
-mount 是把我创建在 temp 中的文件给普罗米修斯用</p>
-<p><a href="https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian">https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian</a>
-<a href="https://unix.stackexchange.com/questions/401203/why-root-cant-open-file-for-writing">https://unix.stackexchange.com/questions/401203/why-root-cant-open-file-for-writing</a></p>
-<p>sudo systemctl start docker (重新启动 docker)</p>
-<p>只需要到第二步就够了</p>
+          <h1 id="基础知识">基础知识</h1>
 <ol>
-<li>run your prometheus in docker instead of on the native host. collect from node_exporter of the raspberry pi
-number 1 is actually two separate ones:
-1a: run your prometheus in docker instead of on the native host
-1b: use that prometheus to collect from node_exporter of the raspberry pi</li>
-<li>collect metrics about the docker <em>engine</em></li>
-<li>collect metrics about <em>each</em> docker container</li>
+<li>树是图的一种</li>
+<li>二叉搜索树： 左边的小于一个数，小于右边的</li>
+<li>平衡树</li>
+<li></li>
 </ol>
 
     </div>
@@ -182,7 +163,7 @@ number 1 is actually two separate ones:
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=https://linna-li.github.io/2021/raspberry-set-docker/>https://linna-li.github.io/2021/raspberry-set-docker/</span>
+                    <a href=https://linna-li.github.io/2021/cict6-trees-and-graphs/>https://linna-li.github.io/2021/cict6-trees-and-graphs/</span>
             </p>
             
             
@@ -194,8 +175,8 @@ number 1 is actually two separate ones:
             <section>
             <i class="iconfont icon-tag"></i>Tag(s): 
             
-            <span class="tag"><a href="https://linna-li.github.io/tags/raspberry/">
-                    #raspberry</a></span>
+            <span class="tag"><a href="https://linna-li.github.io/tags/data-structure/">
+                    #data-structure</a></span>
             
             </section>
         
@@ -207,10 +188,10 @@ number 1 is actually two separate ones:
 
     <div class="post-nav">
         
-        <a href="https://linna-li.github.io/2021/raspberry-set-other/" class="prev" rel="prev" title="其他用到的指令"><i class="iconfont icon-left"></i>&nbsp;其他用到的指令</a>
+        <a href="https://linna-li.github.io/2021/cict5-stacks-and-queues/" class="prev" rel="prev" title="CTCI5-stacks-and-queues"><i class="iconfont icon-left"></i>&nbsp;CTCI5-stacks-and-queues</a>
          
         
-        <a href="https://linna-li.github.io/2021/ctci4-linkedlist/" class="next" rel="next" title="CTCI4-LinkedList">CTCI4-LinkedList&nbsp;<i class="iconfont icon-right"></i></a>
+        <a href="https://linna-li.github.io/2021/raspberry-set-mongodb/" class="next" rel="next" title="安装mongodb">安装mongodb&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 

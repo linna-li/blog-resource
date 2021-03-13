@@ -34,4 +34,9 @@ sudo systemctl start docker (重新启动 docker)
 
 只需要到第二步就够了
 
-为什么 grafana 找不到 DataSource！
+1. run your prometheus in docker instead of on the native host. collect from node_exporter of the raspberry pi
+   number 1 is actually two separate ones:
+   1a: run your prometheus in docker instead of on the native host
+   1b: use that prometheus to collect from node_exporter of the raspberry pi
+2. collect metrics about the docker _engine_
+3. collect metrics about _each_ docker container

@@ -6,10 +6,19 @@
     <description>Recent content in book on Linna</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 08 Mar 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://linna-li.github.io/categories/book/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CTCI6-Trees-and-graphs</title>
+      <link>https://linna-li.github.io/2021/cict6-trees-and-graphs/</link>
+      <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/cict6-trees-and-graphs/</guid>
+      <description>基础知识  树是图的一种 二叉搜索树： 左边的小于一个数，小于右边的 平衡树   </description>
+    </item>
     
     <item>
       <title>CTCI5-stacks-and-queues</title>
