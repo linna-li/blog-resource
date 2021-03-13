@@ -64,6 +64,7 @@ sudo apt install prometheus
 sudo systemctl daemon-reload
 sudo systemctl enable prometheus
 sudo systemctl status prometheus
+sudo systemctl stop prometheus
 sudo ufw allow 9090/tcp
 ```
 
