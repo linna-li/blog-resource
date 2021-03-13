@@ -57,7 +57,7 @@
     "datePublished": "2021-01-30 00:00:00 \x2b0000 UTC",
     "dateModified" : "2021-01-30 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/linna-li.github.io\/2021\/raspberry-set-prometheus\/",
-    "wordCount" : "178",
+    "wordCount" : "182",
     "keywords" : [ "raspberry", "Linna"]
 }
 </script>
@@ -192,6 +192,7 @@ WantedBy=multi-user.target
 sudo systemctl daemon-reload
 sudo systemctl enable prometheus
 sudo systemctl status prometheus
+sudo systemctl stop prometheus
 sudo ufw allow 9090/tcp
 </code></pre><p>sudo killall -HUP prometheus</p>
 <h3 id="关于为什么不用-apt">关于为什么不用 apt</h3>

@@ -6,10 +6,46 @@
     <description>Recent content in Posts on Linna</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Mar 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://linna-li.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>安装ewomail</title>
+      <link>https://linna-li.github.io/2021/raspberry-set-mail/</link>
+      <pubDate>Sat, 20 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/raspberry-set-mail/</guid>
+      <description>https://www.jianshu.com/p/d94b9495f7f9</description>
+    </item>
+    
+    <item>
+      <title>安装cadvisor</title>
+      <link>https://linna-li.github.io/2021/raspberry-set-cadvisor/</link>
+      <pubDate>Sat, 13 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/raspberry-set-cadvisor/</guid>
+      <description>谷歌已经不用 dockerhub 来管理 cadvisor 谷歌只提供了 linux/amd64 的 image，不能用于 linux/arm64/v8 可以自己做一个 binary 然后拿来直接安装在蓝莓派上! https://github.com/google/cadvisor/blob/master/docs/development/build.md 所以 image 其实是对系统有要求的 也可以自己写 dockerfile  http://192.168.0.111:8080/containers/</description>
+    </item>
+    
+    <item>
+      <title>安装mongodb</title>
+      <link>https://linna-li.github.io/2021/raspberry-set-mongodb/</link>
+      <pubDate>Sat, 13 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/raspberry-set-mongodb/</guid>
+      <description>https://phoenixnap.com/kb/docker-mongodb docker run -it -v mongodata:/data/db &amp;ndash;name mongodb -d mongo https://askubuntu.com/questions/477551/how-can-i-use-docker-without-sudo</description>
+    </item>
+    
+    <item>
+      <title>CTCI6-Trees-and-graphs</title>
+      <link>https://linna-li.github.io/2021/cict6-trees-and-graphs/</link>
+      <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/cict6-trees-and-graphs/</guid>
+      <description>基础知识  树：Binary Tree, Binary Search Tree, 平衡与非平衡， 完全二叉树，满二叉树，完美二叉树，三种遍历方式，二叉堆（大顶堆和小顶堆）， 前缀树：用*来表示是一个完整的单词了，可以用来进行快速的前缀搜索 图：树是一种没有环的图。 acyclic 无环 有两种方式经常用来表示图：adjacent 临近的。a(推荐).用 Node 来表示图中所有的点，node 里面有与他相连的其他 Node；b.邻接矩阵表示 matrix[i][j] 图的搜索：深度优先（适用于如果我们想访问所有 node） 广度优先（适用于找指定两个点中间的最短路径） 两个方向的搜索：两个起点一起开始找  题目  有向图，找两个点之间是否有 route  // 广度优先搜索 enum State{ Unvisited, Visited, Visiting} boolean search(Graph g, Node start,Node end){ if(start == end) return true; LinkdList&amp;lt;Node&amp;gt; q = new LinkedList&amp;lt;Node&amp;gt;(); for(Node u:g.getNodes()){ u.state = State.Unvisited; } start.state = State.Visiting; q.add(start); Node u; while(!q.isEmpty()){ u = q.removeFirst(); if(u!=null){ for(Node v:u.</description>
+    </item>
     
     <item>
       <title>CTCI5-stacks-and-queues</title>
@@ -42,7 +78,7 @@ https://docs.docker.com/config/daemon/prometheus/ 导出 metrics 并且重启 do
 https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian https://unix.stackexchange.com/questions/401203/why-root-cant-open-file-for-writing
 sudo systemctl start docker (重新启动 docker)
 只需要到第二步就够了
-为什么 grafana 找不到 DataSource！</description>
+ run your prometheus in docker instead of on the native host. collect from node_exporter of the raspberry pi number 1 is actually two separate ones: 1a: run your prometheus in docker instead of on the native host 1b: use that prometheus to collect from node_exporter of the raspberry pi collect metrics about the docker engine collect metrics about each docker container  </description>
     </item>
     
     <item>
