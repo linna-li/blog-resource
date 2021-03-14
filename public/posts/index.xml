@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Linna</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Feb 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://linna-li.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CTCI5-stacksAndQueues</title>
+      <link>https://linna-li.github.io/2021/ctci5-stacks-and-queues/</link>
+      <pubDate>Thu, 11 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/ctci5-stacks-and-queues/</guid>
+      <description>基础知识  stack: 后进先出 stack 不能在一个固定的时间内找到第几个元素，但是可以简单的插入和移除，用linkedlist可以来实现一个stack  public class Mystack&amp;lt;T&amp;gt; { private static class StackNode&amp;lt;T&amp;gt; { private T data; private StackNode&amp;lt;T&amp;gt; next; public StackNode(T data) { this.data = data; } } private StackNode&amp;lt;T&amp;gt; top; public T pop() { if(top == null) throw new EmptyStackException(); T item = top.data; top = top.next; return item; } public void push(T item){ StackNode&amp;lt;T&amp;gt; t = new StackNode&amp;lt;T&amp;gt;(item); t.next = top; top = t; } public T peek(){ if(top==null) throw new EmptyStackException(); return top.</description>
+    </item>
     
     <item>
       <title>CTCI4-LinkedList</title>
@@ -264,6 +273,15 @@ But it has many &amp;ldquo;friends?&amp;rdquo;
 Python2, Python3-&amp;gt; 2 python version
 pyenv -&amp;gt; a tool that is used to change which version
 pip3, pip -&amp;gt; pip3 is used to download dependency for python2, pip is for python2</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://linna-li.github.io/1/draft/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/1/draft/</guid>
+      <description>树：Binary Tree, Binary Search Tree, 平衡与非平衡， 完全二叉树，满二叉树，完美二叉树，三种遍历方式，二叉堆（大顶堆和小顶堆）， 前缀树：用*来表示是一个完整的单词了，可以用来进行快速的前缀搜索 图：树是一种没有环的图。 acyclic 无环 有两种方式经常用来表示图：adjacent临近的。a(推荐).用Node来表示图中所有的点，node里面有与他相连的其他Node；b.邻接矩阵表示 matrix[i][j] 图的搜索：深度优先（适用于如果我们想访问所有node） 广度优先（适用于找指定两个点中间的最短路径） 两个方向的搜索：两个起点一起开始找  题目  有向图，找两个点之间是否有route  // 广度优先搜索 enum State{ Unvisited, Visited, Visiting} boolean search(Graph g, Node start,Node end){ if(start == end) return true; LinkdList&amp;lt;Node&amp;gt; q = new LinkedList&amp;lt;Node&amp;gt;(); for(Node u:g.getNodes()){ u.state = State.Unvisited; } start.state = State.Visiting; q.add(start); Node u; while(!q.isEmpty()){ u = q.removeFirst(); if(u!=null){ for(Node v:u.getAdjecent()){ if(v.state == State.Unvisited){ if(v == end){ return true; }else{ v.</description>
     </item>
     
   </channel>

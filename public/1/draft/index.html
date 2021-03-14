@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="linna.li">
+  <meta name="description" content="Study Note">
+  <meta name="keywords" content="work server-side">
+  
+  
+  <link rel="next" href="https://linna-li.github.io/2020/python-install/" />
+  <link rel="canonical" href="https://linna-li.github.io/1/draft/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+            | Linna
+       
+  </title>
+  <meta name="title" content=" | Linna">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/linna-li.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "",
+    "headline" : "",
+    "description" : "树：Binary Tree, Binary Search Tree, 平衡与非平衡， 完全二叉树，满二叉树，完美二叉树，三种遍历方式，二叉堆（大顶堆和小顶堆）， 前缀树：用*来表示是一个完整的单词了，可以用来进行快速的前缀搜索 图：树是一种没有环的图。 acyclic 无环 有两种方式经常用来表示图：adjacent临近的。a(推荐).用Node来表示图中所有的点，node里面有与他相连的其他Node；b.邻接矩阵表示 matrix[i][j] 图的搜索：深度优先（适用于如果我们想访问所有node） 广度优先（适用于找指定两个点中间的最短路径） 两个方向的搜索：两个起点一起开始找  题目  有向图，找两个点之间是否有route  \/\/ 广度优先搜索 enum State{ Unvisited, Visited, Visiting} boolean search(Graph g, Node start,Node end){ if(start == end) return true; LinkdList\x26lt;Node\x26gt; q = new LinkedList\x26lt;Node\x26gt;(); for(Node u:g.getNodes()){ u.state = State.Unvisited; } start.state = State.Visiting; q.add(start); Node u; while(!q.isEmpty()){ u = q.removeFirst(); if(u!=null){ for(Node v:u.getAdjecent()){ if(v.state == State.Unvisited){ if(v == end){ return true; }else{ v.",
+    "inLanguage" : "en-us",
+    "author" : "linna.li",
+    "creator" : "linna.li",
+    "publisher": "linna.li",
+    "accountablePerson" : "linna.li",
+    "copyrightHolder" : "linna.li",
+    "copyrightYear" : "0001",
+    "datePublished": "0001-01-01 00:00:00 \x2b0000 UTC",
+    "dateModified" : "0001-01-01 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/linna-li.github.io\/1\/draft\/",
+    "wordCount" : "343",
+    "keywords" : [  "Linna"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://linna-li.github.io">Linna</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://linna-li.github.io">Linna</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline"></h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://linna-li.github.io" rel="author">linna.li</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=0001-01-01 itemprop="datePublished">January 1, 0001</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <ol>
+<li>树：Binary Tree, Binary Search Tree, 平衡与非平衡， 完全二叉树，满二叉树，完美二叉树，三种遍历方式，二叉堆（大顶堆和小顶堆），</li>
+<li>前缀树：用*来表示是一个完整的单词了，可以用来进行快速的前缀搜索</li>
+<li>图：树是一种没有环的图。 acyclic 无环</li>
+<li>有两种方式经常用来表示图：adjacent临近的。a(推荐).用Node来表示图中所有的点，node里面有与他相连的其他Node；b.邻接矩阵表示 matrix[i][j]</li>
+<li>图的搜索：深度优先（适用于如果我们想访问所有node） 广度优先（适用于找指定两个点中间的最短路径）</li>
+<li>两个方向的搜索：两个起点一起开始找</li>
+</ol>
+<h1 id="题目">题目</h1>
+<ol>
+<li>有向图，找两个点之间是否有route</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// 广度优先搜索
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">enum</span> State<span style="color:#f92672">{</span> Unvisited<span style="color:#f92672">,</span> Visited<span style="color:#f92672">,</span> Visiting<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">search</span><span style="color:#f92672">(</span>Graph g<span style="color:#f92672">,</span> Node start<span style="color:#f92672">,</span>Node end<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>start <span style="color:#f92672">=</span><span style="color:#f92672">=</span> end<span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+    LinkdList<span style="color:#f92672">&lt;</span>Node<span style="color:#f92672">&gt;</span> q <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;</span>Node<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>Node u<span style="color:#f92672">:</span>g<span style="color:#f92672">.</span><span style="color:#a6e22e">getNodes</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        u<span style="color:#f92672">.</span><span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> State<span style="color:#f92672">.</span><span style="color:#a6e22e">Unvisited</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    start<span style="color:#f92672">.</span><span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> State<span style="color:#f92672">.</span><span style="color:#a6e22e">Visiting</span><span style="color:#f92672">;</span>
+    q<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>start<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    Node u<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span><span style="color:#f92672">!</span>q<span style="color:#f92672">.</span><span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        u <span style="color:#f92672">=</span> q<span style="color:#f92672">.</span><span style="color:#a6e22e">removeFirst</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>u<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>Node v<span style="color:#f92672">:</span>u<span style="color:#f92672">.</span><span style="color:#a6e22e">getAdjecent</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>v<span style="color:#f92672">.</span><span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> State<span style="color:#f92672">.</span><span style="color:#a6e22e">Unvisited</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+                    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>v <span style="color:#f92672">=</span><span style="color:#f92672">=</span> end<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+                    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+                        v<span style="color:#f92672">.</span><span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> State<span style="color:#f92672">.</span><span style="color:#a6e22e">Visiting</span><span style="color:#f92672">;</span>
+                        q<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>v<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                    <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span>
+            <span style="color:#f92672">}</span>
+            u<span style="color:#f92672">.</span><span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> State<span style="color:#f92672">.</span><span style="color:#a6e22e">Visited</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ol start="2">
+<li>最小高度的树</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// 中间的点作为跟节点，小的放左边，大的放右边
+</span><span style="color:#75715e"></span>
+TreeNode <span style="color:#a6e22e">createMinimalBST</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> array<span style="color:#f92672">[</span><span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">return</span> createMinimalBST<span style="color:#f92672">(</span>array<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> array<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+TreeNode <span style="color:#a6e22e">createMinimalBTS</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> arr<span style="color:#f92672">[</span><span style="color:#f92672">]</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> statr<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> end<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>end <span style="color:#f92672">&lt;</span> start<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>start<span style="color:#f92672">+</span>end<span style="color:#f92672">)</span><span style="color:#f92672">/</span>2<span style="color:#f92672">;</span>
+    TreeNode n <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeNode<span style="color:#f92672">(</span>arr<span style="color:#f92672">[</span>mid<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    n<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> createMinimalBST<span style="color:#f92672">(</span>arr<span style="color:#f92672">,</span> start<span style="color:#f92672">,</span> mid <span style="color:#f92672">-</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    n<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> createMinimalBST<span style="color:#f92672">(</span>arr<span style="color:#f92672">,</span> mid <span style="color:#f92672">+</span> 1<span style="color:#f92672">,</span> end<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> n<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ol start="3">
+<li>每一层转换为一个list</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// 广度遍历
+</span><span style="color:#75715e"></span>ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">createLevelLinkedList</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> result <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#75715e">// visite the node
+</span><span style="color:#75715e"></span>    LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> current <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>root<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        current<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>root<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>current<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">&gt;</span>0<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        result<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>current<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// add previous level
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 作为parents，去找下一层的
+</span><span style="color:#75715e"></span>        LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> parents <span style="color:#f92672">=</span> current<span style="color:#f92672">;</span>
+        <span style="color:#75715e">// 创建一个空的list来装下一层
+</span><span style="color:#75715e"></span>        current <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>TreeNode parent <span style="color:#f92672">:</span> parents<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#75715e">// visit children
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>parent<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+                current<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>parent<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>parent<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+                current<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>parent<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> result<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// 前序遍历实现
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createLevelLinkedList</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">,</span> ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> lists<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> level<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>root <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> list <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>lists<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> level<span style="color:#f92672">)</span><span style="color:#f92672">{</span> <span style="color:#75715e">// 说明目前的这层没有在lists里面
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 新的一层
+</span><span style="color:#75715e"></span>        list <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        lists<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>list<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+        list <span style="color:#f92672">=</span> lists<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>level<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    list<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>root<span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// 把自己加进去
+</span><span style="color:#75715e"></span>    createLevelLinkedList<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span>lists<span style="color:#f92672">,</span>level<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    createLevelLinkedList<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">,</span> lists<span style="color:#f92672">,</span> level<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">createLevelLinkedList</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> lists <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    createLevelLinkedList<span style="color:#f92672">(</span>root<span style="color:#f92672">,</span> lists<span style="color:#f92672">,</span> 0<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> lists<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ol start="4">
+<li>检查一颗树是否平衡</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// 递归
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getHeight</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>root<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">max</span><span style="color:#f92672">(</span>getHeight<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span>getHeight<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span>1<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isBalanced</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>root<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> heighDiff <span style="color:#f92672">=</span> getHeight<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span> getHeight<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>Math<span style="color:#f92672">.</span><span style="color:#a6e22e">abs</span><span style="color:#f92672">(</span>heightDiff<span style="color:#f92672">)</span><span style="color:#f92672">&gt;</span>1<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> isBalanced<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">)</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span>isBalanced<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// 因为要计算多次树的高度，所以效率不是很高。时间复杂度是O(NlogN)
+</span><span style="color:#75715e"></span>
+</code></pre></div><p>改进</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">checkHeight</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>root<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> leftHeight <span style="color:#f92672">=</span> checkHeight<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>leftHeight <span style="color:#f92672">=</span><span style="color:#f92672">=</span> Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">MIN_VALUE</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">MIN_VALUE</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> rightHeight <span style="color:#f92672">=</span> checkHeight<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>rightHeight <span style="color:#f92672">=</span><span style="color:#f92672">=</span> Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">MIN_VALUE</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">MIN_VALUE</span><span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">int</span> heightDiff <span style="color:#f92672">=</span> leftHeight <span style="color:#f92672">-</span> rightHeight<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>Math<span style="color:#f92672">.</span><span style="color:#a6e22e">abs</span><span style="color:#f92672">(</span>heightDiff<span style="color:#f92672">)</span> <span style="color:#f92672">&gt;</span>1<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#75715e">// 发现不是balanced的时候就马上中断
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">MIN_VALUE</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+        <span style="color:#75715e">// 只有在balanced的时候才返回高度
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">max</span><span style="color:#f92672">(</span>leftHeight<span style="color:#f92672">,</span> rightHeight<span style="color:#f92672">)</span> <span style="color:#f92672">+</span>1<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isBalanced</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">return</span> checkHeight<span style="color:#f92672">(</span>root<span style="color:#f92672">)</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span>Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">MIN_VALUE</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>4.5 检查一棵树是不是二叉搜索树</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>linna.li </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://linna-li.github.io/1/draft/>https://linna-li.github.io/1/draft/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://linna-li.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+         
+        
+        <a href="https://linna-li.github.io/2020/python-install/" class="next" rel="next" title="超入門個人用Python Note">超入門個人用Python Note&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2020 - 2021</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://linna-li.github.io">linna.li</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

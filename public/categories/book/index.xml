@@ -6,10 +6,19 @@
     <description>Recent content in book on Linna</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Feb 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://linna-li.github.io/categories/book/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CTCI5-stacksAndQueues</title>
+      <link>https://linna-li.github.io/2021/ctci5-stacks-and-queues/</link>
+      <pubDate>Thu, 11 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/ctci5-stacks-and-queues/</guid>
+      <description>基础知识  stack: 后进先出 stack 不能在一个固定的时间内找到第几个元素，但是可以简单的插入和移除，用linkedlist可以来实现一个stack  public class Mystack&amp;lt;T&amp;gt; { private static class StackNode&amp;lt;T&amp;gt; { private T data; private StackNode&amp;lt;T&amp;gt; next; public StackNode(T data) { this.data = data; } } private StackNode&amp;lt;T&amp;gt; top; public T pop() { if(top == null) throw new EmptyStackException(); T item = top.data; top = top.next; return item; } public void push(T item){ StackNode&amp;lt;T&amp;gt; t = new StackNode&amp;lt;T&amp;gt;(item); t.next = top; top = t; } public T peek(){ if(top==null) throw new EmptyStackException(); return top.</description>
+    </item>
     
     <item>
       <title>CTCI4-LinkedList</title>
