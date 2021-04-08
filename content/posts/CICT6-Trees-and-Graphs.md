@@ -286,8 +286,82 @@ TreeNode lesfMostChild(TreeNode n){
 // 2. 移除所有依赖这个点的所有边
 // 3. 重复1
 // 需要的数据结构，每个点（包含依赖于这个点的其他点，这个点依赖的其他的点的个数）
+public class Project{
+    private ArrayList<Project> children = new ArrayList<Project>();
+    private HashMap<String, Project> map = new HashMap<String, Project>();
+    private String name;
+    private int dependencies = 0;
+    public Project(String n){name = n;}
 
+    //  加自己的下一个节点，node是要依赖自己的
+    public void addNeighbor(Project node){
+        if(!map.containsKey(node.getName())){
+            children.add(node);
+            map.put(node.getName(),node);
+            node.incrementDependencies();
+        }
+    }
+}
+public class Graph {
+    private ArrayList<Project> nodes = new ArrayList<Project>();
+    private HashMap<String, Project> map = new HashMap<String, Project>();
+
+    public Project getOrCreateNode(String name){
+        if(!map.containKey(name)){
+            Project node = new Project(name);
+            nodes.addd(node);
+            map.put(name, node);
+        }
+        return map.get(name);
+    }
+    public void addEdge(String startName, String endName){
+        Project start = getOrCreateNode(startName);
+        Project end = getOrCreateNode(endName);
+        start.addNeighbor(end);
+    }
+    public ArrayList<Project> getNodes(){return nodes;}
+}
+
+Project[] findBuildOrder(String[] projects, String[][] dependencies){
+    Graph graph = buildGraph(projects, depedencies);
+    return orderProjects(graph.getNodes());
+}
+Graph buildGraph(String[] projects,String[][] dependencies){
+    Graph graph = new Graph();
+    for(String project:projects){
+        graph.createNode(project);
+    }
+    for(String[] dependency:dependencies){
+        String first = dependency[0];
+        String second = dependency[1];
+        graph.addEdge(first, second);
+    }
+    return graph;
+}
+
+Project[] orderrProjects(ArrayList<Project> projects){
+    Project[] order = new Project[projects.size()];
+    // 把没有依赖的放进order里面
+    int endOfList = addNonDependent(order, projects,0);
+
+    int toBeProcessed = 0;
+    while(toBeProcessed < order.length) {
+        Project current = order[toBeProcessed];
+        if(current == null){
+            return null;
+        }
+        ArrayList<Project> children = current.getChildren();
+        for(Project child : children){
+            child.decrementDependencies();
+        }
+        endOfList = addNonDependent(order, children,endOfList);
+        toBeProcessed++;
+    }
+    return order;
+}
 ```
+解法2: 用DFS
+
 
 
 
