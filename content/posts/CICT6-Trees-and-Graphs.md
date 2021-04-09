@@ -361,6 +361,44 @@ Project[] orderrProjects(ArrayList<Project> projects){
 }
 ```
 解法2: 用DFS
+每次回溯到前面的时候，在列表的前面加上一个点
+```java
+Stack<Project> findBuildOrder(String[] projects, String[][] dependencies){
+    Graph graph = buildGraph(projects, dependencies);
+    return orderProjects(graph.getNodes());
+}
+Stack<Project> orderProjects(ArrayList<Project> projects){
+    Stack<Project> stack = new Stack<Project>();
+    for(Project project:projects){
+        if(project.getState()== Project.status.BLANK){
+            if(!doDFS(project, stack)){
+                return null;
+            }
+        }
+    }
+    return stack;
+}
+boolean doDFS(Project project, Stack<Project> stack){
+    if(project.getState()==Project.state.PARTIAL){
+        return false;
+    }
+
+    if(project.getState() == Project.state.BLANK){
+        project.setState(Project.state.PARTIAL);
+        ArrayList<Project> children = project.getChildren();
+        for(Project child:children){
+            if(!doDFS(child,stack)){
+                return false;
+            }
+        }
+        project.setState(Project.state.COMPLETE);
+        stack.push(project);
+    }
+
+    return true;
+}
+```
+
 
 
 
@@ -622,3 +660,131 @@ boolean matchTree(TreeNode r1, TreeNode r2){
     }
 }
 ```
+4.11 实现一个 getRandomNode()的方法
+solution1: 我的解法，把所有的点放在一个数组里面，然后随机取出来一个。
+时间和空间复杂度都是O(n)。每次树被更新了，都重新copy一次
+solution2: 维护一个数组，每次不去重新copy全部，但是每次树被删除了节点，这个数组也需要被更新
+solution3: 维护一个数组的index
+solution4: 根据深度（但是不能保证每层的节点一样多，而且不能随机选到那一层的节点） 
+solution5: 随机的向下，按照相同的概率去选择当前的节点，或者当前节点右子树的，或者当前节点左子树的
+solution6: 纠正solution5，选到每个节点的概率应该是 1/N，所以从N中随机选一个数，如果是0就返回root，
+如果不是0，就从左子树或者右子数中找。
+因为左子树和右子数的节点的数量是不一样的，所以需要知道节点的个数。
+去左子树的概率是 LEFT_SIZE * 1/N, 去右子树的概率是 RIGHT_SIZE * 1/N
+```java
+class TreeNode {
+    private int data;
+    public TreeNode left;
+    public TreeNode right;
+    // size 是包含本身和左右子树的所有
+    private int size = 0;
+}
+
+public TreeNode(int d){
+    data = d;
+    size = 1;
+}
+
+public TreeNode getRandomNode(){
+    int leftSize = left == null ? 0 : left.size();
+    Random random = new Random();
+    int index = random.nextInt(size);
+    if(index < leftSize){
+        return left.getRandomNode();
+    }else if(index == leftSize){
+        return this;
+    }else {
+        return right.getRandomNode();
+    }
+}
+```
+
+solution7: 减少random的使用次数
+重复使用第一次得到的随机数
+共9个节点，左边6个，右边2个
+第一次得到了 0 ～ 5中间的一个数，所以去左边找
+到了左边之后 可以继续使用前一个数即可。
+如果是 7 或者 8，要去右边，但是右边只有两个节点，所有减去 6+1
+```java
+class Tree{
+    TreeNode root == null;
+    public int size() {return root == null?0:root.size();}
+
+    public TreeNode getRandomNode(){
+        if(root==null) return null;
+        Random random = new Random();
+        int i = random.nextInt(size());
+        return root.getIthNode(i);
+    }
+
+    public void insertInOrder(int value){
+        if(root==null){
+            root = new TreeNode(value);
+        }else{
+            root.insertInOrder(value);
+        }
+    }
+
+    class TreeNode{
+        public TreeNode getIthNode(int i){
+            int leftSize = left == null ? 0:left.size();
+            if(i < leftSize){
+                return left.getIthNode(i);
+            }else if(i==leftSize){
+                return this;
+            }else{
+                return right.getIthNode(i-(leftSize+1));
+            }
+        }
+    }
+}
+```
+
+4.12 给定一颗二叉树和一个值，找到所有可以凑成这个值的路径
+路径不一定必须要从根结点开始，但是一定要从上向下
+
+solution1: 暴力解法
+遍历每一个点，计算可能存在的路径的数量。时间复杂度是 O(NlogN)
+如果树不是平衡的，时间复杂度会更差 达到O(N*N)
+solution2: 优化，去掉重复的检查。
+在遍历的时候记下啦当前的currentValue，然后减去targetvalue，从hashtable里面查有没有这个值。
+hashtable里面要存遍历过的所有节点为终点时候的value，即相对去他们的currentValue
+```java
+int countPathWithSum(TreeNode root, int targetSum){
+    return countPathWithSum(root, targetSum, 0, new HashMap<Integer, Integer>());
+}
+
+int countPathWithSum(TreeNode node, int targetSum, int runningSum, HashMap<Integer, Integer> pathCount){
+    if(node==null) return 0;
+    runningSum += node.data;
+    int sum = runningSum - targetSum;
+    // 从hashmap里面查有几条路径可以满足
+    int totalPaths = pathCount.getOrDefault(sum,0);
+
+    // 表示本身也可以满足，即从root开始多了一条
+    if(runningSum == targetSum){
+        totalPaths++; 
+    }
+
+    // 把表里面值是runningSum的数量加1
+    incrementHashTable(pathCount, runningSum, 1);
+
+    // 向下找
+    totalPaths += countPathWithSum(node.left, targetSum, runningSum, pathCount);
+    totalPaths += countPathWithSum(node.right, targetSum, runningSum, pathCount);
+
+    incrementHashTable(pathCount, runningSum, -1);
+    return totalPaths;
+}
+
+void incrementHashTable(HashMap<Integer, Integer> hashTable, int key, int delta){
+    int newCount = hashTable.getOrDefault(key,0)+delta;
+    // 因为之前加过一次，所以至少是0
+    if(newCount == 0){
+        hashTable.remove(key);
+    }else{
+        hashTable.put(key,newCount);
+    }
+}
+```
+
