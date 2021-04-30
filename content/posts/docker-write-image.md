@@ -40,8 +40,6 @@ curl http://localhost:9090/metrics
 
 127.0.0.1:80:8080/tcp
 
+docker run -p 9090:9090 -d linna:v1 --config.file=/etc/prometheus/prometheus.yml
 
-
-docker run -d linna:v1 -p -p 127.0.0.1:80:9090/tcp --config.file=/etc/prometheus/prometheus.yml
-
-This binds port 8080 of the container to TCP port 80 on 127.0.0.1 of the host machine. 
+-p should be used before image name 
