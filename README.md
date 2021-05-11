@@ -1,5 +1,6 @@
 ## Update on 12/30
 
+Access by: https://linna-li.github.io/
 For myself: I should try to update everyday, just for avoiding forgetting how to use this theme. If forgot, check https://github.com/liuzc/LeaveIt
 
 ### I made a repo inside public, so can push to linna-li.github.io.git directly

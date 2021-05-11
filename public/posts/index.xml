@@ -6,10 +6,36 @@
     <description>Recent content in Posts on Linna</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 29 Apr 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://linna-li.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>尝试自己写dockerfile</title>
+      <link>https://linna-li.github.io/2021/docker-write-image/</link>
+      <pubDate>Thu, 29 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/docker-write-image/</guid>
+      <description>比较简单的只要单独的dockerFile就可以 最简单： FROM ubuntu:20.04
+删除所有的image docker rmi $(docker images -a -q)
+run一个image，注意要用 -ti
+The -t is TTY and -i will keep STDIN open. if don&#39;t do this, bash will see that there is no more input on STDIN and exit.  docker run -d -ti &amp;ndash;entrypoint /bin/bash ubuntulln:v1 docker exec -ti 86f8f0e0 /bin/bash
+查看硬件系统 root@86f8f0e09045:/# uname -m x86_64
+container name: the name is randomly generated if you don&#39;t set it yourself, but human readable.</description>
+    </item>
+    
+    <item>
+      <title>CTCI7-Bit-manipulation</title>
+      <link>https://linna-li.github.io/2021/cict7-bit-manipulation/</link>
+      <pubDate>Tue, 13 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/cict7-bit-manipulation/</guid>
+      <description>二进制处理 ^是异或XOR
+处理技巧  0110 + 0110 相当于乘2，即左移动一位 与自己本身取反的数进行异或，一定得到全是1的一串  Two&#39;s Complement and Negative Numbers 计算机使用 *二进制补码（Two&#39;s Complement）*来存储整数的 正数存的是自己； 负数存的是他的 绝对值（absolute value）的补码，符号位是1，表示这是一个负数；
+一个N位不带符号数（即绝对值）的补码，是 （2^N - 本身） 英语叫做the complement of the number with respect to 2^N. 即 -K (negative K) as a N-bit(包括符号位) number 是 concat(1, 2^(N-1) - K) 比如说 占四个二进制位 一位是符号为，三位表示数 如果要求3的补码，就是5，5是101，所以-3就是 1101
+也可以直接算：绝对值是3是011， 取反+1 = 100 + 1 = 101，再加上符号位 算数和逻辑右移 算数右移相当于除以2 用 &amp;raquo; 1 最左边一位补和之前相同的符号(所以一个负数一直进行算数右移动会得到 -1) 逻辑右移相当于用 &amp;raquo;&amp;gt;1 最左边一位补0</description>
+    </item>
     
     <item>
       <title>安装ewomail</title>

@@ -9,9 +9,9 @@
   <meta name="description" content="Study Note">
   <meta name="keywords" content="work server-side">
   
-  <link rel="prev" href="https://linna-li.github.io/2021/raspberry-set-cadvisor/" />
-  <link rel="next" href="https://linna-li.github.io/2021/cict7-bit-manipulation/" />
-  <link rel="canonical" href="https://linna-li.github.io/2021/raspberry-set-mail/" />
+  <link rel="prev" href="https://linna-li.github.io/2021/cict7-bit-manipulation/" />
+  
+  <link rel="canonical" href="https://linna-li.github.io/2021/docker-write-image/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           安装ewomail | Linna
+           尝试自己写dockerfile | Linna
        
   </title>
-  <meta name="title" content="安装ewomail | Linna">
+  <meta name="title" content="尝试自己写dockerfile | Linna">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,9 +44,9 @@
          "@id": "https:\/\/linna-li.github.io"
     },
     "articleSection" : "posts",
-    "name" : "安装ewomail",
-    "headline" : "安装ewomail",
-    "description" : "https:\/\/www.jianshu.com\/p\/d94b9495f7f9",
+    "name" : "尝试自己写dockerfile",
+    "headline" : "尝试自己写dockerfile",
+    "description" : "比较简单的只要单独的dockerFile就可以 最简单： FROM ubuntu:20.04\n删除所有的image docker rmi $(docker images -a -q)\nrun一个image，注意要用 -ti\nThe -t is TTY and -i will keep STDIN open. if don\x27t do this, bash will see that there is no more input on STDIN and exit.  docker run -d -ti \x26ndash;entrypoint \/bin\/bash ubuntulln:v1 docker exec -ti 86f8f0e0 \/bin\/bash\n查看硬件系统 root@86f8f0e09045:\/# uname -m x86_64\ncontainer name: the name is randomly generated if you don\x27t set it yourself, but human readable.",
     "inLanguage" : "en-us",
     "author" : "linna.li",
     "creator" : "linna.li",
@@ -54,11 +54,11 @@
     "accountablePerson" : "linna.li",
     "copyrightHolder" : "linna.li",
     "copyrightYear" : "2021",
-    "datePublished": "2021-03-20 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2021-03-20 00:00:00 \x2b0000 UTC",
-    "url" : "https:\/\/linna-li.github.io\/2021\/raspberry-set-mail\/",
-    "wordCount" : "1",
-    "keywords" : [ "raspberry", "Linna"]
+    "datePublished": "2021-04-29 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2021-04-29 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/linna-li.github.io\/2021\/docker-write-image\/",
+    "wordCount" : "75",
+    "keywords" : [ "docker", "Linna"]
 }
 </script>
 
@@ -112,11 +112,11 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">安装ewomail</h1>
+        <h1 class="post-title" itemprop="name headline">尝试自己写dockerfile</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://linna-li.github.io" rel="author">linna.li</a> with ♥ 
                 <span class="post-time">
-                on <time datetime=2021-03-20 itemprop="datePublished">March 20, 2021</time>
+                on <time datetime=2021-04-29 itemprop="datePublished">April 29, 2021</time>
                 </span>
                 in
                 <i class="iconfont icon-folder"></i>
@@ -142,7 +142,21 @@
           
           
 
-          <p><a href="https://www.jianshu.com/p/d94b9495f7f9">https://www.jianshu.com/p/d94b9495f7f9</a></p>
+          <p>比较简单的只要单独的dockerFile就可以
+最简单：
+FROM ubuntu:20.04</p>
+<p>删除所有的image
+docker rmi $(docker images -a -q)</p>
+<p>run一个image，注意要用 -ti</p>
+<h3 id="the--t-is-tty-and--i-will-keep-stdin-open-if-dont-do-this-bash-will-see-that-there-is-no-more-input-on-stdin-and-exit">The -t is TTY and -i will keep STDIN open. if don't do this, bash will see that there is no more input on STDIN and exit.</h3>
+<h3 id="heading"></h3>
+<p>docker run -d -ti &ndash;entrypoint /bin/bash ubuntulln:v1
+docker exec -ti 86f8f0e0 /bin/bash</p>
+<p>查看硬件系统
+root@86f8f0e09045:/# uname -m
+x86_64</p>
+<p>container name: the name is randomly generated if you don't set it yourself, but human readable.
+Reference: <a href="https://docs.docker.com/engine/reference/builder/">https://docs.docker.com/engine/reference/builder/</a></p>
 
     </div>
 
@@ -157,7 +171,7 @@
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=https://linna-li.github.io/2021/raspberry-set-mail/>https://linna-li.github.io/2021/raspberry-set-mail/</span>
+                    <a href=https://linna-li.github.io/2021/docker-write-image/>https://linna-li.github.io/2021/docker-write-image/</span>
             </p>
             
             
@@ -169,8 +183,8 @@
             <section>
             <i class="iconfont icon-tag"></i>Tag(s): 
             
-            <span class="tag"><a href="https://linna-li.github.io/tags/raspberry/">
-                    #raspberry</a></span>
+            <span class="tag"><a href="https://linna-li.github.io/tags/docker/">
+                    #docker</a></span>
             
             </section>
         
@@ -182,10 +196,8 @@
 
     <div class="post-nav">
         
-        <a href="https://linna-li.github.io/2021/raspberry-set-cadvisor/" class="prev" rel="prev" title="安装cadvisor"><i class="iconfont icon-left"></i>&nbsp;安装cadvisor</a>
+        <a href="https://linna-li.github.io/2021/cict7-bit-manipulation/" class="prev" rel="prev" title="CTCI7-Bit-manipulation"><i class="iconfont icon-left"></i>&nbsp;CTCI7-Bit-manipulation</a>
          
-        
-        <a href="https://linna-li.github.io/2021/cict7-bit-manipulation/" class="next" rel="next" title="CTCI7-Bit-manipulation">CTCI7-Bit-manipulation&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 

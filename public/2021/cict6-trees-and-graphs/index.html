@@ -57,7 +57,7 @@
     "datePublished": "2021-03-08 00:00:00 \x2b0000 UTC",
     "dateModified" : "2021-03-08 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/linna-li.github.io\/2021\/cict6-trees-and-graphs\/",
-    "wordCount" : "352",
+    "wordCount" : "1730",
     "keywords" : [ "data-structure", "Linna"]
 }
 </script>
@@ -295,8 +295,566 @@ ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f9
 <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isBalanced</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
     <span style="color:#66d9ef">return</span> checkHeight<span style="color:#f92672">(</span>root<span style="color:#f92672">)</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span>Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">MIN_VALUE</span><span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><p>4.5 检查一棵树是不是二叉搜索树</p>
+</code></pre></div><p>4.5 检查一棵树是不是二叉搜索树(等于的情况要在左边子树)
+如果没有重复的元素，可以直接进行中序遍历，然后结果存在一个数组中，看这个数组是不是单调递增的</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isSearchTree</span><span style="color:#f92672">(</span>TreeNode node<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> finalList <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    addInList<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span>finalList<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    finalList<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    addInList<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">,</span>finalList<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>finalList<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>finalList<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>i<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span><span style="color:#f92672">&lt;</span>finalList<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">adddInList</span><span style="color:#f92672">(</span>TreeNode node<span style="color:#f92672">,</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> finalList<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>node<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+         finalList<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+        adddInList<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span> finalList<span style="color:#f92672">)</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        finalList<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">,</span> finalList<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">checkBST</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> array <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+    copyBST<span style="color:#f92672">(</span>root<span style="color:#f92672">,</span> array<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>array<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> array<span style="color:#f92672">[</span>i<span style="color:#f92672">-</span>1<span style="color:#f92672">]</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">copyBST</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> array<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>root<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+    copyBST<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span>array<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    array<span style="color:#f92672">[</span>index<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> root<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">;</span>
+    index<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+    copyBST<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">,</span> array<span style="color:#f92672">)</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Integer lastNumber <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+<span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">checkBTS</span><span style="color:#f92672">(</span>TreeNode n<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>n<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#f92672">!</span>checkBST<span style="color:#f92672">(</span>n<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>lastNumber <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> n<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> lastNumber<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    lastNumber <span style="color:#f92672">=</span> n<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#f92672">!</span>checkBST<span style="color:#f92672">(</span>n<span style="color:#f92672">.</span><span style="color:#a6e22e">righht</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">checkBST</span><span style="color:#f92672">(</span>TreeNode n<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">return</span> checkBST<span style="color:#f92672">(</span>n<span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">checkBST</span><span style="color:#f92672">(</span>TreeNode n<span style="color:#f92672">,</span> Integer min<span style="color:#f92672">,</span> Integer max<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>n<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#f92672">(</span>min<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span>n<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span>min<span style="color:#f92672">)</span><span style="color:#f92672">|</span><span style="color:#f92672">|</span><span style="color:#f92672">(</span>max<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span>n<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">&gt;</span>max<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#f92672">!</span>checkBST<span style="color:#f92672">(</span>n<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span>min<span style="color:#f92672">,</span>n<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">)</span><span style="color:#f92672">|</span><span style="color:#f92672">|</span><span style="color:#f92672">!</span>checkBST<span style="color:#f92672">(</span>n<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">,</span>n<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">,</span>max<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
 
+</code></pre></div><p>4.6 中序遍历的情况下，找到下一个节点</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">TreeNode <span style="color:#a6e22e">inorderSucc</span><span style="color:#f92672">(</span>TreeNode n<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>n<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>n<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> 
+        leftMostChild<span style="color:#f92672">(</span>n<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+        TreeNode q <span style="color:#f92672">=</span> n<span style="color:#f92672">;</span>
+        TreeNode x <span style="color:#f92672">=</span> q<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">;</span>
+        <span style="color:#75715e">// 向上找一直到本身在一颗树的左子树上
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>x<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span>x<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span>q<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            q <span style="color:#f92672">=</span> x<span style="color:#f92672">;</span>
+            x <span style="color:#f92672">=</span> x<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> x<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+TreeNode <span style="color:#a6e22e">lesfMostChild</span><span style="color:#f92672">(</span>TreeNode n<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>n<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>n<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        n <span style="color:#f92672">=</span> n<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> n<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>4.7 带有dependencies的项目解决方案</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">// 解法1: 
+</span><span style="color:#75715e"></span><span style="color:#75715e">// 1. 加入没有income的点
+</span><span style="color:#75715e"></span><span style="color:#75715e">// 2. 移除所有依赖这个点的所有边
+</span><span style="color:#75715e"></span><span style="color:#75715e">// 3. 重复1
+</span><span style="color:#75715e"></span><span style="color:#75715e">// 需要的数据结构，每个点（包含依赖于这个点的其他点，这个点依赖的其他的点的个数）
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Project</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> ArrayList<span style="color:#f92672">&lt;</span>Project<span style="color:#f92672">&gt;</span> children <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>Project<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> HashMap<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> Project<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> Project<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> String name<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> dependencies <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Project</span><span style="color:#f92672">(</span>String n<span style="color:#f92672">)</span><span style="color:#f92672">{</span>name <span style="color:#f92672">=</span> n<span style="color:#f92672">;</span><span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">//  加自己的下一个节点，node是要依赖自己的
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addNeighbor</span><span style="color:#f92672">(</span>Project node<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#f92672">!</span>map<span style="color:#f92672">.</span><span style="color:#a6e22e">containsKey</span><span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            children<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>node<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            map<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span>node<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            node<span style="color:#f92672">.</span><span style="color:#a6e22e">incrementDependencies</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Graph</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> ArrayList<span style="color:#f92672">&lt;</span>Project<span style="color:#f92672">&gt;</span> nodes <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>Project<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> HashMap<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> Project<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> Project<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> Project <span style="color:#a6e22e">getOrCreateNode</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#f92672">!</span>map<span style="color:#f92672">.</span><span style="color:#a6e22e">containKey</span><span style="color:#f92672">(</span>name<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            Project node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Project<span style="color:#f92672">(</span>name<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            nodes<span style="color:#f92672">.</span><span style="color:#a6e22e">addd</span><span style="color:#f92672">(</span>node<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            map<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>name<span style="color:#f92672">,</span> node<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> map<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>name<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addEdge</span><span style="color:#f92672">(</span>String startName<span style="color:#f92672">,</span> String endName<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        Project start <span style="color:#f92672">=</span> getOrCreateNode<span style="color:#f92672">(</span>startName<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        Project end <span style="color:#f92672">=</span> getOrCreateNode<span style="color:#f92672">(</span>endName<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        start<span style="color:#f92672">.</span><span style="color:#a6e22e">addNeighbor</span><span style="color:#f92672">(</span>end<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">public</span> ArrayList<span style="color:#f92672">&lt;</span>Project<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getNodes</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span><span style="color:#66d9ef">return</span> nodes<span style="color:#f92672">;</span><span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+Project<span style="color:#f92672">[</span><span style="color:#f92672">]</span> <span style="color:#a6e22e">findBuildOrder</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> projects<span style="color:#f92672">,</span> String<span style="color:#f92672">[</span><span style="color:#f92672">]</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> dependencies<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    Graph graph <span style="color:#f92672">=</span> buildGraph<span style="color:#f92672">(</span>projects<span style="color:#f92672">,</span> depedencies<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> orderProjects<span style="color:#f92672">(</span>graph<span style="color:#f92672">.</span><span style="color:#a6e22e">getNodes</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+Graph <span style="color:#a6e22e">buildGraph</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> projects<span style="color:#f92672">,</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> dependencies<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    Graph graph <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Graph<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>String project<span style="color:#f92672">:</span>projects<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        graph<span style="color:#f92672">.</span><span style="color:#a6e22e">createNode</span><span style="color:#f92672">(</span>project<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> dependency<span style="color:#f92672">:</span>dependencies<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        String first <span style="color:#f92672">=</span> dependency<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+        String second <span style="color:#f92672">=</span> dependency<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+        graph<span style="color:#f92672">.</span><span style="color:#a6e22e">addEdge</span><span style="color:#f92672">(</span>first<span style="color:#f92672">,</span> second<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> graph<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+Project<span style="color:#f92672">[</span><span style="color:#f92672">]</span> <span style="color:#a6e22e">orderrProjects</span><span style="color:#f92672">(</span>ArrayList<span style="color:#f92672">&lt;</span>Project<span style="color:#f92672">&gt;</span> projects<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    Project<span style="color:#f92672">[</span><span style="color:#f92672">]</span> order <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Project<span style="color:#f92672">[</span>projects<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+    <span style="color:#75715e">// 把没有依赖的放进order里面
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> endOfList <span style="color:#f92672">=</span> addNonDependent<span style="color:#f92672">(</span>order<span style="color:#f92672">,</span> projects<span style="color:#f92672">,</span>0<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">int</span> toBeProcessed <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>toBeProcessed <span style="color:#f92672">&lt;</span> order<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Project current <span style="color:#f92672">=</span> order<span style="color:#f92672">[</span>toBeProcessed<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>current <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        ArrayList<span style="color:#f92672">&lt;</span>Project<span style="color:#f92672">&gt;</span> children <span style="color:#f92672">=</span> current<span style="color:#f92672">.</span><span style="color:#a6e22e">getChildren</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>Project child <span style="color:#f92672">:</span> children<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            child<span style="color:#f92672">.</span><span style="color:#a6e22e">decrementDependencies</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        endOfList <span style="color:#f92672">=</span> addNonDependent<span style="color:#f92672">(</span>order<span style="color:#f92672">,</span> children<span style="color:#f92672">,</span>endOfList<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        toBeProcessed<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> order<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>解法2: 用DFS
+每次回溯到前面的时候，在列表的前面加上一个点</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Stack<span style="color:#f92672">&lt;</span>Project<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">findBuildOrder</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> projects<span style="color:#f92672">,</span> String<span style="color:#f92672">[</span><span style="color:#f92672">]</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> dependencies<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    Graph graph <span style="color:#f92672">=</span> buildGraph<span style="color:#f92672">(</span>projects<span style="color:#f92672">,</span> dependencies<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> orderProjects<span style="color:#f92672">(</span>graph<span style="color:#f92672">.</span><span style="color:#a6e22e">getNodes</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+Stack<span style="color:#f92672">&lt;</span>Project<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">orderProjects</span><span style="color:#f92672">(</span>ArrayList<span style="color:#f92672">&lt;</span>Project<span style="color:#f92672">&gt;</span> projects<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    Stack<span style="color:#f92672">&lt;</span>Project<span style="color:#f92672">&gt;</span> stack <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Stack<span style="color:#f92672">&lt;</span>Project<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>Project project<span style="color:#f92672">:</span>projects<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>project<span style="color:#f92672">.</span><span style="color:#a6e22e">getState</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span> Project<span style="color:#f92672">.</span><span style="color:#a6e22e">status</span><span style="color:#f92672">.</span><span style="color:#a6e22e">BLANK</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#f92672">!</span>doDFS<span style="color:#f92672">(</span>project<span style="color:#f92672">,</span> stack<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> stack<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">doDFS</span><span style="color:#f92672">(</span>Project project<span style="color:#f92672">,</span> Stack<span style="color:#f92672">&lt;</span>Project<span style="color:#f92672">&gt;</span> stack<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>project<span style="color:#f92672">.</span><span style="color:#a6e22e">getState</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span>Project<span style="color:#f92672">.</span><span style="color:#a6e22e">state</span><span style="color:#f92672">.</span><span style="color:#a6e22e">PARTIAL</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>project<span style="color:#f92672">.</span><span style="color:#a6e22e">getState</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> Project<span style="color:#f92672">.</span><span style="color:#a6e22e">state</span><span style="color:#f92672">.</span><span style="color:#a6e22e">BLANK</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        project<span style="color:#f92672">.</span><span style="color:#a6e22e">setState</span><span style="color:#f92672">(</span>Project<span style="color:#f92672">.</span><span style="color:#a6e22e">state</span><span style="color:#f92672">.</span><span style="color:#a6e22e">PARTIAL</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        ArrayList<span style="color:#f92672">&lt;</span>Project<span style="color:#f92672">&gt;</span> children <span style="color:#f92672">=</span> project<span style="color:#f92672">.</span><span style="color:#a6e22e">getChildren</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>Project child<span style="color:#f92672">:</span>children<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#f92672">!</span>doDFS<span style="color:#f92672">(</span>child<span style="color:#f92672">,</span>stack<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        project<span style="color:#f92672">.</span><span style="color:#a6e22e">setState</span><span style="color:#f92672">(</span>Project<span style="color:#f92672">.</span><span style="color:#a6e22e">state</span><span style="color:#f92672">.</span><span style="color:#a6e22e">COMPLETE</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        stack<span style="color:#f92672">.</span><span style="color:#a6e22e">push</span><span style="color:#f92672">(</span>project<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>4.8 查找两个节点的最近的公共祖先
+Solution #1: 如果有指向parents节点的指针
+可以把两个节点先移动到相同的高度，然后同时向上移动</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">TreeNode <span style="color:#a6e22e">commonAncestor</span><span style="color:#f92672">(</span>TreeNode p<span style="color:#f92672">,</span> TreeNode q<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> delta <span style="color:#f92672">=</span> depth<span style="color:#f92672">(</span>p<span style="color:#f92672">)</span> <span style="color:#f92672">-</span> depth<span style="color:#f92672">(</span>q<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    TreeNode first <span style="color:#f92672">=</span> delta <span style="color:#f92672">&gt;</span> 0 <span style="color:#f92672">?</span> q<span style="color:#f92672">:</span>p<span style="color:#f92672">;</span>
+    TreeNode second <span style="color:#f92672">=</span> delta<span style="color:#f92672">&gt;</span>0<span style="color:#f92672">?</span>p<span style="color:#f92672">:</span>q<span style="color:#f92672">;</span>
+    second <span style="color:#f92672">=</span> goUpBy<span style="color:#f92672">(</span>second<span style="color:#f92672">,</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">abs</span><span style="color:#f92672">(</span>delta<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>first <span style="color:#f92672">!</span><span style="color:#f92672">=</span> second <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> firsst <span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span>second<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        first <span style="color:#f92672">=</span> first<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">;</span>
+        second <span style="color:#f92672">=</span> second<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> first <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">|</span><span style="color:#f92672">|</span> second <span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">?</span><span style="color:#66d9ef">null</span><span style="color:#f92672">:</span>first<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Solution #2: 从任意一个节点开始向上找，但是只需要检查p不在的那一条子树。
+如果找到一个cover了q的节点，那么这个节点就是公共祖先</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">TreeNode <span style="color:#a6e22e">commonAncestor</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">,</span> TreeNode p<span style="color:#f92672">,</span> TreeNode q<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#f92672">!</span>covers<span style="color:#f92672">(</span>root<span style="color:#f92672">,</span> p<span style="color:#f92672">)</span><span style="color:#f92672">|</span><span style="color:#f92672">|</span><span style="color:#f92672">!</span>covers<span style="color:#f92672">(</span>root<span style="color:#f92672">,</span> q<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>covers<span style="color:#f92672">(</span>p<span style="color:#f92672">,</span>q<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> p<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>covers<span style="color:#f92672">(</span>q<span style="color:#f92672">,</span>p<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> q<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    TreeNode sibling <span style="color:#f92672">=</span> getSibling<span style="color:#f92672">(</span>p<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    TreeNode parent <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span><span style="color:#f92672">!</span>covers<span style="color:#f92672">(</span>sibling<span style="color:#f92672">,</span>q<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        sibling <span style="color:#f92672">=</span> getSibling<span style="color:#f92672">(</span>parent<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        parent <span style="color:#f92672">=</span> parent<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> parent<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+TreeNode <span style="color:#a6e22e">getSibling</span><span style="color:#f92672">(</span>TreeNode node<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>node <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">|</span><span style="color:#f92672">|</span> node<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    TreeNode parent <span style="color:#f92672">=</span> node<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> parent<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> node <span style="color:#f92672">?</span> parent<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">:</span>parent<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Solution #3: 如果没有指向父母节点的时候
+从根节点开始检查两个节点是不是在一边上，如果是在一边上，则需要继续往下找，如果不是在一边上就找到了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">TreeNode <span style="color:#a6e22e">commonAncestor</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">,</span> TreeNode p<span style="color:#f92672">,</span> TreeNode q<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#f92672">!</span>covers<span style="color:#f92672">(</span>root<span style="color:#f92672">,</span> p<span style="color:#f92672">)</span><span style="color:#f92672">|</span><span style="color:#f92672">|</span><span style="color:#f92672">!</span>covers<span style="color:#f92672">(</span>root<span style="color:#f92672">,</span> q<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> ancestorHelper<span style="color:#f92672">(</span>root<span style="color:#f92672">,</span> p<span style="color:#f92672">,</span> q<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+TreeNode <span style="color:#a6e22e">ancestorHelper</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">,</span> TreeNode p<span style="color:#f92672">,</span> TreeNode q<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>root <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">|</span><span style="color:#f92672">|</span> root <span style="color:#f92672">=</span><span style="color:#f92672">=</span> p<span style="color:#f92672">|</span><span style="color:#f92672">|</span> root<span style="color:#f92672">=</span><span style="color:#f92672">=</span>q <span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> root<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">boolean</span> pIsOnLeft <span style="color:#f92672">=</span> covers<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span> p<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">boolean</span> qIsOnLeft <span style="color:#f92672">=</span> covers<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span> q<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>pIsOnLeft <span style="color:#f92672">!</span><span style="color:#f92672">=</span> qIsOnLeft<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> root<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    TreeNode childSide <span style="color:#f92672">=</span> pIsOnLeft<span style="color:#f92672">?</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">:</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> ancestorHelper<span style="color:#f92672">(</span>childSide<span style="color:#f92672">,</span>p<span style="color:#f92672">,</span>q<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Solution #4: 因为解法3会存在重复检查的情况，所以可以进行优化
+为了只遍历一边就判断出两个点的位置，当root的两边都有返回的时候，这个root就是最近的公共节点。
+如果找到了一个，就返回找到的节点；
+如果两个都没找到，说明不在；
+如果两个都找到了，当前root节点就是公共的祖先节点；</p>
+<p>Solution #5: Optimized
+4有一个bug是无法区分一个节点是不是不存在的情况。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">TreeNode <span style="color:#a6e22e">commonAncestor</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">,</span> TreeNode p<span style="color:#f92672">,</span> TreeNode q<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>root <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>root <span style="color:#f92672">=</span><span style="color:#f92672">=</span> p <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> root <span style="color:#f92672">=</span><span style="color:#f92672">=</span> q<span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> root<span style="color:#f92672">;</span>
+    TreeNode x <span style="color:#f92672">=</span> commonAncestor<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span> p<span style="color:#f92672">,</span> q<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>x<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> y<span style="color:#f92672">!</span><span style="color:#f92672">=</span>p <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> y<span style="color:#f92672">!</span><span style="color:#f92672">=</span>q<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> x<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    TreeNode y <span style="color:#f92672">=</span> commonAncestor<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">,</span> p<span style="color:#f92672">,</span> q<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>y<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span>y<span style="color:#f92672">!</span><span style="color:#f92672">=</span>p<span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span>y<span style="color:#f92672">!</span><span style="color:#f92672">=</span>q<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> y<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>x<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span>y<span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> root<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>root<span style="color:#f92672">=</span><span style="color:#f92672">=</span>p<span style="color:#f92672">|</span><span style="color:#f92672">|</span>rppt<span style="color:#f92672">=</span><span style="color:#f92672">=</span>q<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> root<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> x <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> y<span style="color:#f92672">:</span>x<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Fix bug</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Result</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> TreeNode node<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> isAncestor<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Result</span><span style="color:#f92672">(</span>TreeNode n<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> isAnc<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        node <span style="color:#f92672">=</span> n<span style="color:#f92672">;</span>
+        isAncestor <span style="color:#f92672">=</span> isAnc<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+TreeNode <span style="color:#a6e22e">commonAncestor</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">,</span> TreeNode p<span style="color:#f92672">,</span>TreeNode q<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    Result r <span style="color:#f92672">=</span> commonAncestorHelper<span style="color:#f92672">(</span>root<span style="color:#f92672">,</span>p<span style="color:#f92672">,</span>q<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>r<span style="color:#f92672">.</span><span style="color:#a6e22e">isAncestor</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> r<span style="color:#f92672">.</span><span style="color:#a6e22e">node</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+Result <span style="color:#a6e22e">commonAncHelper</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">,</span> TreeNode p<span style="color:#f92672">,</span> TreeNode q<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>root<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Result<span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>root <span style="color:#f92672">=</span><span style="color:#f92672">=</span> p <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> root <span style="color:#f92672">=</span><span style="color:#f92672">=</span> q<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Result<span style="color:#f92672">(</span>root<span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    Result rx <span style="color:#f92672">=</span> commonAncHelper<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span>p<span style="color:#f92672">,</span>q<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>rx<span style="color:#f92672">.</span><span style="color:#a6e22e">isAncestor</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> rx<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    Result ry <span style="color:#f92672">=</span> commonAncHelper<span style="color:#f92672">(</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">,</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">q</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>ry<span style="color:#f92672">.</span><span style="color:#a6e22e">isAncestor</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> ry<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>rx<span style="color:#f92672">.</span><span style="color:#a6e22e">node</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> ry<span style="color:#f92672">.</span><span style="color:#a6e22e">node</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Result<span style="color:#f92672">(</span>root<span style="color:#f92672">,</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#75715e">// root 是，而且又在root的子树中找到了一个，所以这个是合法的    
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>root <span style="color:#f92672">=</span><span style="color:#f92672">=</span> p <span style="color:#f92672">|</span><span style="color:#f92672">|</span> root <span style="color:#f92672">=</span><span style="color:#f92672">=</span> q<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">boolean</span> isAncestor <span style="color:#f92672">=</span> rx<span style="color:#f92672">.</span><span style="color:#a6e22e">node</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">|</span><span style="color:#f92672">|</span>ry<span style="color:#f92672">.</span><span style="color:#a6e22e">node</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Result<span style="color:#f92672">(</span>root<span style="color:#f92672">,</span>isAncestor<span style="color:#f92672">)</span><span style="color:#f92672">;</span> 
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+        <span style="color:#75715e">// root 不是，但在root的子树中找到了一个，所以这个是不合法的 
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Result<span style="color:#f92672">(</span>rx<span style="color:#f92672">.</span><span style="color:#a6e22e">node</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">?</span>rx<span style="color:#f92672">.</span><span style="color:#a6e22e">node</span><span style="color:#f92672">:</span>ry<span style="color:#f92672">.</span><span style="color:#a6e22e">node</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>4.9 查找能够形成一颗二叉搜索树的所有的数组
+只要保证根节点相对于左右子树的所有节点在最前面即可，左右子树之间有大小差异，所以左右子树的节点可以位置无所谓，
+但是同理，一颗子树里面一定要保证根节点在最前面</p>
+<p>根 左根（左边子树的节点在这之后） 右根（右边子树的节点在这之后）
+根 右根（右边子树的节点在这之后） 左根（左边子树的节点在这之后）</p>
+<p>所以可以 左根+右根 所有组合，最后加上 根</p>
+<p>weave(first, second, prefix)
+因为要经常删除添加，所以适合用链表</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">allSequences</span><span style="color:#f92672">(</span>TreeNode node<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> result <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>node <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        result<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        retrun result<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> prefix <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    prefix<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+    ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> leftSeq <span style="color:#f92672">=</span> allSequences<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> rightSeq <span style="color:#f92672">=</span> allSequences<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> left<span style="color:#f92672">:</span>leftSeq<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> right<span style="color:#f92672">:</span> rightSeq<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> weaved <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            weaveLists<span style="color:#f92672">(</span>left<span style="color:#f92672">,</span> right<span style="color:#f92672">,</span> weaved<span style="color:#f92672">,</span> prefix<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            result<span style="color:#f92672">.</span><span style="color:#a6e22e">addAll</span><span style="color:#f92672">(</span>weaved<span style="color:#f92672">)</span><span style="color:#f92672">;</span> 
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> result<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">weaveLists</span><span style="color:#f92672">(</span>LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> first<span style="color:#f92672">,</span> LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> second<span style="color:#f92672">,</span> 
+                ArrayList<span style="color:#f92672">&lt;</span>LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> results<span style="color:#f92672">,</span> LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> prefix<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>first<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0 <span style="color:#f92672">|</span><span style="color:#f92672">|</span> second<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> result <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span><span style="color:#f92672">)</span> prefix<span style="color:#f92672">.</span><span style="color:#a6e22e">clone</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        result<span style="color:#f92672">.</span><span style="color:#a6e22e">addAll</span><span style="color:#f92672">(</span>first<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        result<span style="color:#f92672">.</span><span style="color:#a6e22e">addAll</span><span style="color:#f92672">(</span>second<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        results<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>result<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span> 
+
+    <span style="color:#66d9ef">int</span> headFirst <span style="color:#f92672">=</span> first<span style="color:#f92672">.</span><span style="color:#a6e22e">removeFirst</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    prefix<span style="color:#f92672">.</span><span style="color:#a6e22e">addLast</span><span style="color:#f92672">(</span>headFirst<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    weaveLists<span style="color:#f92672">(</span>first<span style="color:#f92672">,</span> second<span style="color:#f92672">,</span> results<span style="color:#f92672">,</span> prefix<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    prefix<span style="color:#f92672">.</span><span style="color:#a6e22e">removeLast</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    first<span style="color:#f92672">.</span><span style="color:#a6e22e">addFirst</span><span style="color:#f92672">(</span>headFirst<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">int</span> headSecond <span style="color:#f92672">=</span> second<span style="color:#f92672">.</span><span style="color:#a6e22e">removeFiirst</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    prefix<span style="color:#f92672">.</span><span style="color:#a6e22e">addLast</span><span style="color:#f92672">(</span>headSecond<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    weaveLists<span style="color:#f92672">(</span>first<span style="color:#f92672">,</span> second<span style="color:#f92672">,</span> results<span style="color:#f92672">,</span>prefix<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    prefix<span style="color:#f92672">.</span><span style="color:#a6e22e">removeLast</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    second<span style="color:#f92672">.</span><span style="color:#a6e22e">addFirst</span><span style="color:#f92672">(</span>headSecond<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>4.10 检查一棵树T2是不是一颗大树T1的子树
+子树要求结构和数据完全一样的，所以不能通过中序遍历来检查。</p>
+<p>比如说一颗搜索二叉树，中序遍历一定得到的是相同的有序数列，即使他的结构不一样
+3
+1   4
+X1X3X4X
+4
+3
+1
+X1X3X4X</p>
+<p>前序遍历是可以的，但是要注意空指针不能不输出</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">containsTree</span><span style="color:#f92672">(</span>TreeNode t1<span style="color:#f92672">,</span> TreeNode t2<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    StringBuilder string1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    StringBuilder string2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    getOrderString<span style="color:#f92672">(</span>t1<span style="color:#f92672">,</span>string1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    getOrderString<span style="color:#f92672">(</span>t2<span style="color:#f92672">,</span>string2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> string1<span style="color:#f92672">.</span><span style="color:#a6e22e">indexOf</span><span style="color:#f92672">(</span>string2<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getOrderString</span><span style="color:#f92672">(</span>TreeNode node<span style="color:#f92672">,</span> StringBuilder sb<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>node <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        sb<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;X&#39;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    sb<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    getOrderString<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span>sb<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    getOrderString<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">,</span>sb<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Solution2: 从大树的跟节点开始，每次遇到和小树的跟节点一样的节点，就检查两树是不是完全一样的</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">containsTree</span><span style="color:#f92672">(</span>TreeNode t1<span style="color:#f92672">,</span> TreeNode t2<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>t2<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> subTree<span style="color:#f92672">(</span>t1<span style="color:#f92672">,</span>t2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">subTree</span><span style="color:#f92672">(</span>TreeNode r1<span style="color:#f92672">,</span> TreeNode r2<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>r1 <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>r1<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> r2<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> matchTree<span style="color:#f92672">(</span>r1<span style="color:#f92672">,</span>r2<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> subTree<span style="color:#f92672">(</span>r1<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span> r2<span style="color:#f92672">)</span><span style="color:#f92672">|</span><span style="color:#f92672">|</span> subTree<span style="color:#f92672">(</span>r1<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">,</span>r2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">matchTree</span><span style="color:#f92672">(</span>TreeNode r1<span style="color:#f92672">,</span> TreeNode r2<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>r1<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span>r2<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>r1<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">|</span><span style="color:#f92672">|</span>r2<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>r1<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">!</span><span style="color:#f92672">=</span>r2<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> matchTree<span style="color:#f92672">(</span>r1<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span> r2<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">)</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> matchTree<span style="color:#f92672">(</span>r1<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">,</span> r2<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>4.11 实现一个 getRandomNode()的方法
+solution1: 我的解法，把所有的点放在一个数组里面，然后随机取出来一个。
+时间和空间复杂度都是O(n)。每次树被更新了，都重新copy一次
+solution2: 维护一个数组，每次不去重新copy全部，但是每次树被删除了节点，这个数组也需要被更新
+solution3: 维护一个数组的index
+solution4: 根据深度（但是不能保证每层的节点一样多，而且不能随机选到那一层的节点）
+solution5: 随机的向下，按照相同的概率去选择当前的节点，或者当前节点右子树的，或者当前节点左子树的
+solution6: 纠正solution5，选到每个节点的概率应该是 1/N，所以从N中随机选一个数，如果是0就返回root，
+如果不是0，就从左子树或者右子数中找。
+因为左子树和右子数的节点的数量是不一样的，所以需要知道节点的个数。
+去左子树的概率是 LEFT_SIZE * 1/N, 去右子树的概率是 RIGHT_SIZE * 1/N</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TreeNode</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> data<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> TreeNode left<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> TreeNode right<span style="color:#f92672">;</span>
+    <span style="color:#75715e">// size 是包含本身和左右子树的所有
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> size <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">TreeNode</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> d<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    data <span style="color:#f92672">=</span> d<span style="color:#f92672">;</span>
+    size <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">public</span> TreeNode <span style="color:#a6e22e">getRandomNode</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> leftSize <span style="color:#f92672">=</span> left <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> 0 <span style="color:#f92672">:</span> left<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    Random random <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Random<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span><span style="color:#a6e22e">nextInt</span><span style="color:#f92672">(</span>size<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>index <span style="color:#f92672">&lt;</span> leftSize<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> left<span style="color:#f92672">.</span><span style="color:#a6e22e">getRandomNode</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>index <span style="color:#f92672">=</span><span style="color:#f92672">=</span> leftSize<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> right<span style="color:#f92672">.</span><span style="color:#a6e22e">getRandomNode</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>solution7: 减少random的使用次数
+重复使用第一次得到的随机数
+共9个节点，左边6个，右边2个
+第一次得到了 0 ～ 5中间的一个数，所以去左边找
+到了左边之后 可以继续使用前一个数即可。
+如果是 7 或者 8，要去右边，但是右边只有两个节点，所有减去 6+1</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Tree</span><span style="color:#f92672">{</span>
+    TreeNode root <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">size</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span><span style="color:#66d9ef">return</span> root <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">?</span>0<span style="color:#f92672">:</span>root<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> TreeNode <span style="color:#a6e22e">getRandomNode</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>root<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        Random random <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Random<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span><span style="color:#a6e22e">nextInt</span><span style="color:#f92672">(</span>size<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> root<span style="color:#f92672">.</span><span style="color:#a6e22e">getIthNode</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">insertInOrder</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> value<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>root<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            root <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeNode<span style="color:#f92672">(</span>value<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+            root<span style="color:#f92672">.</span><span style="color:#a6e22e">insertInOrder</span><span style="color:#f92672">(</span>value<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TreeNode</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">public</span> TreeNode <span style="color:#a6e22e">getIthNode</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">int</span> leftSize <span style="color:#f92672">=</span> left <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> 0<span style="color:#f92672">:</span>left<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;</span> leftSize<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">return</span> left<span style="color:#f92672">.</span><span style="color:#a6e22e">getIthNode</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>i<span style="color:#f92672">=</span><span style="color:#f92672">=</span>leftSize<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">return</span> right<span style="color:#f92672">.</span><span style="color:#a6e22e">getIthNode</span><span style="color:#f92672">(</span>i<span style="color:#f92672">-</span><span style="color:#f92672">(</span>leftSize<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>4.12 给定一颗二叉树和一个值，找到所有可以凑成这个值的路径
+路径不一定必须要从根结点开始，但是一定要从上向下</p>
+<p>solution1: 暴力解法
+遍历每一个点，计算可能存在的路径的数量。时间复杂度是 O(NlogN)
+如果树不是平衡的，时间复杂度会更差 达到O(N*N)
+solution2: 优化，去掉重复的检查。
+在遍历的时候记下啦当前的currentValue，然后减去targetvalue，从hashtable里面查有没有这个值。
+hashtable里面要存遍历过的所有节点为终点时候的value，即相对去他们的currentValue</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">countPathWithSum</span><span style="color:#f92672">(</span>TreeNode root<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> targetSum<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">return</span> countPathWithSum<span style="color:#f92672">(</span>root<span style="color:#f92672">,</span> targetSum<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">,</span> Integer<span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">countPathWithSum</span><span style="color:#f92672">(</span>TreeNode node<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> targetSum<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> runningSum<span style="color:#f92672">,</span> HashMap<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">,</span> Integer<span style="color:#f92672">&gt;</span> pathCount<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>node<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> 0<span style="color:#f92672">;</span>
+    runningSum <span style="color:#f92672">+</span><span style="color:#f92672">=</span> node<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> runningSum <span style="color:#f92672">-</span> targetSum<span style="color:#f92672">;</span>
+    <span style="color:#75715e">// 从hashmap里面查有几条路径可以满足
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> totalPaths <span style="color:#f92672">=</span> pathCount<span style="color:#f92672">.</span><span style="color:#a6e22e">getOrDefault</span><span style="color:#f92672">(</span>sum<span style="color:#f92672">,</span>0<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+    <span style="color:#75715e">// 表示本身也可以满足，即从root开始多了一条
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>runningSum <span style="color:#f92672">=</span><span style="color:#f92672">=</span> targetSum<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        totalPaths<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span> 
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">// 把表里面值是runningSum的数量加1
+</span><span style="color:#75715e"></span>    incrementHashTable<span style="color:#f92672">(</span>pathCount<span style="color:#f92672">,</span> runningSum<span style="color:#f92672">,</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+    <span style="color:#75715e">// 向下找
+</span><span style="color:#75715e"></span>    totalPaths <span style="color:#f92672">+</span><span style="color:#f92672">=</span> countPathWithSum<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span> targetSum<span style="color:#f92672">,</span> runningSum<span style="color:#f92672">,</span> pathCount<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    totalPaths <span style="color:#f92672">+</span><span style="color:#f92672">=</span> countPathWithSum<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">,</span> targetSum<span style="color:#f92672">,</span> runningSum<span style="color:#f92672">,</span> pathCount<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+    incrementHashTable<span style="color:#f92672">(</span>pathCount<span style="color:#f92672">,</span> runningSum<span style="color:#f92672">,</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> totalPaths<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">incrementHashTable</span><span style="color:#f92672">(</span>HashMap<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">,</span> Integer<span style="color:#f92672">&gt;</span> hashTable<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> key<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> delta<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> newCount <span style="color:#f92672">=</span> hashTable<span style="color:#f92672">.</span><span style="color:#a6e22e">getOrDefault</span><span style="color:#f92672">(</span>key<span style="color:#f92672">,</span>0<span style="color:#f92672">)</span><span style="color:#f92672">+</span>delta<span style="color:#f92672">;</span>
+    <span style="color:#75715e">// 因为之前加过一次，所以至少是0
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>newCount <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        hashTable<span style="color:#f92672">.</span><span style="color:#a6e22e">remove</span><span style="color:#f92672">(</span>key<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+        hashTable<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>key<span style="color:#f92672">,</span>newCount<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div>
     </div>
 
     <div class="post-copyright">

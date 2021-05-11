@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on Linna</title>
+    <link>https://linna-li.github.io/tags/docker/</link>
+    <description>Recent content in docker on Linna</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Apr 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://linna-li.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>尝试自己写dockerfile</title>
+      <link>https://linna-li.github.io/2021/docker-write-image/</link>
+      <pubDate>Thu, 29 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://linna-li.github.io/2021/docker-write-image/</guid>
+      <description>比较简单的只要单独的dockerFile就可以 最简单： FROM ubuntu:20.04
+删除所有的image docker rmi $(docker images -a -q)
+run一个image，注意要用 -ti
+The -t is TTY and -i will keep STDIN open. if don&#39;t do this, bash will see that there is no more input on STDIN and exit.  docker run -d -ti &amp;ndash;entrypoint /bin/bash ubuntulln:v1 docker exec -ti 86f8f0e0 /bin/bash
+查看硬件系统 root@86f8f0e09045:/# uname -m x86_64
+container name: the name is randomly generated if you don&#39;t set it yourself, but human readable.</description>
+    </item>
+    
+  </channel>
+</rss>

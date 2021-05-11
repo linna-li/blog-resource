@@ -71,3 +71,5 @@ sudo ufw allow 9090/tcp
 sudo killall -HUP prometheus
 
 ### 关于为什么不用 apt
+
+
